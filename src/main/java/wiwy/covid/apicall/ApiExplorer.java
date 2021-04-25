@@ -3,6 +3,7 @@ package wiwy.covid.apicall;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import wiwy.covid.apicall.coronadto.CoronaDto;
 import wiwy.covid.apicall.coronadto.Response;
@@ -18,11 +19,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class ApiExplorer {
 
     private final CoronaRepository coronaRepository;
+    private final DisMsgRepository disMsgRepository;
     private ObjectMapper xmlMapper = new XmlMapper();
 
     @Transactional
@@ -60,7 +63,7 @@ public class ApiExplorer {
     }
 
     @Transactional
-    public void updateDisMsg(String startDate, String endDate) throws IOException {
+    public void updateDisMsg() throws IOException {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1741000/DisasterMsg3/getDisasterMsg1List"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=PPcz55RLIRHgBc%2B5Kzjvbqey%2BsWKrDNmUGNinjzzMcrOygzB%2FI8Tin7bENsGHgDV9puW%2BxpcymvgAU79Rl8S5Q%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("인증키", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
@@ -88,11 +91,17 @@ public class ApiExplorer {
 
         DisMsgTotal disMsgTotal = xmlMapper.readValue(sb.toString(), DisMsgTotal.class);
         List<DisMsg> rows = disMsgTotal.getRows();
+        int currentSN = rows.get(0).getMd101_sn();
 
+        List<DisMsg> recentDisMsg = disMsgRepository.findRecentDisMsg();
+        int recentSN = recentDisMsg.get(0).getMd101_sn();
 
-        Response response= xmlMapper.readValue(sb.toString(), Response.class);
-        List<CoronaDto> items = response.getBody().getItems();
-        coronaRepository.save(items);
+        int validateSN = currentSN-recentSN;
 
+        if(validateSN != 0) {
+            for (int i = 0 ; i < validateSN ; i++) {
+                disMsgRepository.save(rows.get(i));
+            }
+        }
     }
 }

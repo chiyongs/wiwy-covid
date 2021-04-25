@@ -2,6 +2,7 @@ package wiwy.covid.apicall;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 import wiwy.covid.apicall.dismsgdto.DisMsg;
 
@@ -15,12 +16,26 @@ public class DisMsgRepository {
 
     private final EntityManager em;
 
-    public void save(List<DisMsg> rows) {
-        for (DisMsg row : rows) {
-            em.persist(row);
-            log.info("DisMsg saved, create_date = {}", row.getCreate_date());
-        }
+    public void save(DisMsg disMsg) {
+        em.persist(disMsg);
+        log.info("DisMsg updated, md101_sn = {}", disMsg.getMd101_sn());
     }
 
-//    public
+    public List<DisMsg> findBySN(int currentSN) {
+        return em.createQuery("select d from DisMsg d where d.md101_sn = :currentSN", DisMsg.class)
+                .setParameter("currentSN", currentSN)
+                .getResultList();
+    }
+
+    public List<DisMsg> findAll() {
+        return em.createQuery("select d from DisMsg d", DisMsg.class).getResultList();
+    }
+
+    public List<DisMsg> findRecentDisMsg() {
+        return em.createQuery("select d from DisMsg d order by d.md101_sn desc", DisMsg.class)
+                .setFirstResult(0)
+                .setMaxResults(1)
+                .getResultList();
+
+    }
 }
