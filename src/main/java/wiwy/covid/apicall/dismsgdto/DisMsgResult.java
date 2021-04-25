@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class DisMsgResult {
-    private String resultCode;
+    private int resultCode;
     private String resultMsg;
 }

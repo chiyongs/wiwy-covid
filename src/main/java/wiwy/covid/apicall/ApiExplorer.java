@@ -61,27 +61,22 @@ public class ApiExplorer {
         Response response= xmlMapper.readValue(sb.toString(), Response.class);
 
         if(response.getBody().getTotalCount() != 0 && response.getHeader().getResultCode() == 0) {
-            List<CoronaDto> items = response.getBody().getItems();
-            System.out.println(items.toString());
-            Integer currentSeq = items.get(0).getSeq();
-            log.debug("currentSeq = {}", currentSeq);
-
-            if(currentSeq == null) {
-                currentSeq = 0;
+            if(response.getBody().getItems() != null) {
+                List<CoronaDto> items = response.getBody().getItems();
+                System.out.println(items.toString());
+                Integer currentSeq = items.get(0).getSeq();
+                log.debug("currentSeq = {}", currentSeq);
+                validateCoronaData(items, currentSeq);
             }
-            validateCoronaData(items, currentSeq);
         } else {
             log.warn("Corona Data API ERROR");
         }
-
-
-
     }
 
     private void validateCoronaData(List<CoronaDto> items, Integer currentSeq) {
         List<CoronaDto> recentCorona = coronaRepository.findRecentCorona();
         int recentSeq = 0;
-        if(!recentCorona.isEmpty()) {
+        if(recentCorona != null) {
             recentSeq = recentCorona.get(0).getSeq();
         }
         int validateSeq = currentSeq - recentSeq;
@@ -123,20 +118,29 @@ public class ApiExplorer {
         System.out.println(sb.toString());
 
         DisMsgTotal disMsgTotal = xmlMapper.readValue(sb.toString(), DisMsgTotal.class);
-        List<DisMsg> rows = disMsgTotal.getRows();
-        Integer currentSN = rows.get(0).getMd101_sn();
-        if(currentSN == null) {
-            currentSN = 0;
+        if(disMsgTotal.getResult().getResultCode() == 0 && disMsgTotal.getHead().getTotalCount() != 0) {
+            if(disMsgTotal.getRows() != null) {
+                List<DisMsg> rows = disMsgTotal.getRows();
+                Integer currentSN = rows.get(0).getMd101_sn();
+                if(currentSN == null) {
+                    currentSN = 0;
+                }
+                validateDisMsgSN(rows, currentSN);
+            }
         }
-
-        validateDisMsgSN(rows, currentSN);
     }
 
     private void validateDisMsgSN(List<DisMsg> rows, Integer currentSN) {
         List<DisMsg> recentDisMsg = disMsgRepository.findRecentDisMsg();
+        // 재난문자가 DB에 아예 없을 때 -> 초기상태
+        if(recentDisMsg == null) {
+            for (DisMsg disMsg : recentDisMsg) {
+                disMsgRepository.save(disMsg);
+            }
+            return;
+        }
         int recentSN = recentDisMsg.get(0).getMd101_sn();
-
-        int validateSN = currentSN -recentSN;
+        int validateSN = currentSN - recentSN;
 
         if(validateSN != 0) {
             for (int i = 0 ; i < validateSN ; i++) {
@@ -145,30 +149,4 @@ public class ApiExplorer {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1741000/DisasterMsg3/getDisasterMsg1List"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=PPcz55RLIRHgBc%2B5Kzjvbqey%2BsWKrDNmUGNinjzzMcrOygzB%2FI8Tin7bENsGHgDV9puW%2BxpcymvgAU79Rl8S5Q%3D%3D"); /*Service Key*/
-        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
-        urlBuilder.append("&" + URLEncoder.encode("type","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*호출문서 형식*/
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/json");
-        System.out.println("Response code: " + conn.getResponseCode());
-        BufferedReader rd;
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        rd.close();
-        conn.disconnect();
-        System.out.println(sb.toString());
-    }
 }
