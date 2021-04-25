@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import wiwy.covid.apicall.dismsgdto.DisMsg;
 
 import javax.persistence.EntityManager;
@@ -12,10 +13,12 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Repository
+@Transactional(readOnly = true)
 public class DisMsgRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public void save(DisMsg disMsg) {
         em.persist(disMsg);
         log.info("DisMsg updated, md101_sn = {}", disMsg.getMd101_sn());

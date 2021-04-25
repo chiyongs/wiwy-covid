@@ -58,8 +58,22 @@ public class ApiExplorer {
 
         Response response= xmlMapper.readValue(sb.toString(), Response.class);
         List<CoronaDto> items = response.getBody().getItems();
-        coronaRepository.save(items);
+        int currentSeq = items.get(0).getSeq();
 
+        validateCoronaData(items, currentSeq);
+
+    }
+
+    private void validateCoronaData(List<CoronaDto> items, int currentSeq) {
+        List<CoronaDto> recentCorona = coronaRepository.findRecentCorona();
+        int recentSeq = recentCorona.get(0).getSeq();
+        int validateSeq = currentSeq - recentSeq;
+
+        if(validateSeq != 0) {
+            for(int i=0;i<validateSeq;i++) {
+                coronaRepository.save(items.get(i));
+            }
+        }
     }
 
     @Transactional
@@ -93,10 +107,14 @@ public class ApiExplorer {
         List<DisMsg> rows = disMsgTotal.getRows();
         int currentSN = rows.get(0).getMd101_sn();
 
+        validateDisMsgSN(rows, currentSN);
+    }
+
+    private void validateDisMsgSN(List<DisMsg> rows, int currentSN) {
         List<DisMsg> recentDisMsg = disMsgRepository.findRecentDisMsg();
         int recentSN = recentDisMsg.get(0).getMd101_sn();
 
-        int validateSN = currentSN-recentSN;
+        int validateSN = currentSN -recentSN;
 
         if(validateSN != 0) {
             for (int i = 0 ; i < validateSN ; i++) {
