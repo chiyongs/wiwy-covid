@@ -16,6 +16,8 @@ spring:
         format_sql: true
 logging:
   level:
+    wiwy:
+      covid: debug
     org.hibernate.SQL: debug
     #  org.hibernate.type: trace
 
