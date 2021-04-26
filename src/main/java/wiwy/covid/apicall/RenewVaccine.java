@@ -17,6 +17,6 @@ public class RenewVaccine {
     @Scheduled(cron = "0 5 9 * * *")
     public void renewingVaccine() throws IOException {
         apiExplorer.updateVaccine();
-        log.info("Update Vaccine");
+        log.info("Update Item");
     }
 }

@@ -8,9 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype")
-public abstract class Vaccine {
+public class Vaccine {
 
     @Id @GeneratedValue
     @Column(name = "vaccine_id")

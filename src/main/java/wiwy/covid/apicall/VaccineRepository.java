@@ -20,11 +20,11 @@ public class VaccineRepository {
     @Transactional
     public void save(Vaccine vaccine) {
         em.persist(vaccine);
-        log.info("Vaccine saved");
+        log.info("Item saved");
     }
 
     public List<Vaccine> findAll() {
-        return em.createQuery("select v from Vaccine v", Vaccine.class)
+        return em.createQuery("select i from Item i", Vaccine.class)
                 .getResultList();
     }
 

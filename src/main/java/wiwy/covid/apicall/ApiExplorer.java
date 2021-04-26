@@ -157,7 +157,8 @@ public class ApiExplorer {
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/json");
+        System.setProperty("https.protocols", "TLSv1");
+
         BufferedReader rd;
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -171,6 +172,8 @@ public class ApiExplorer {
         }
         rd.close();
         conn.disconnect();
+
+//        System.out.println(sb.toString());
 
         wiwy.covid.apicall.vaccinedto.Response response = xmlMapper.readValue(sb.toString(), wiwy.covid.apicall.vaccinedto.Response.class);
         List<Vaccine> items = response.getBody().getItems();
