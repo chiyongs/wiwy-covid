@@ -9,8 +9,8 @@ import wiwy.covid.apicall.coronadto.CoronaDto;
 import wiwy.covid.apicall.coronadto.Response;
 import wiwy.covid.apicall.dismsgdto.DisMsg;
 import wiwy.covid.apicall.dismsgdto.DisMsgTotal;
+import wiwy.covid.apicall.vaccinedto.Vaccine;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -27,6 +27,7 @@ public class ApiExplorer {
 
     private final CoronaRepository coronaRepository;
     private final DisMsgRepository disMsgRepository;
+    private final VaccineRepository vaccineRepository;
     private ObjectMapper xmlMapper = new XmlMapper();
 
     @Transactional
@@ -115,7 +116,7 @@ public class ApiExplorer {
         }
         rd.close();
         conn.disconnect();
-        System.out.println(sb.toString());
+//        System.out.println(sb.toString());
 
         DisMsgTotal disMsgTotal = xmlMapper.readValue(sb.toString(), DisMsgTotal.class);
         if(disMsgTotal.getResult().getResultCode() == 0 && disMsgTotal.getHead().getTotalCount() != 0) {
@@ -147,6 +148,39 @@ public class ApiExplorer {
                 disMsgRepository.save(rows.get(i));
             }
         }
+    }
+
+    @Transactional
+    public void updateVaccine() throws IOException{
+        String vaccineURL = "https://nip.kdca.go.kr/irgd/cov19stats.do?list=all";
+        URL url = new URL(vaccineURL);
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+        BufferedReader rd;
+        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        wiwy.covid.apicall.vaccinedto.Response response = xmlMapper.readValue(sb.toString(), wiwy.covid.apicall.vaccinedto.Response.class);
+        List<Vaccine> items = response.getBody().getItems();
+        if(items != null) {
+            for (Vaccine item : items) {
+                vaccineRepository.save(item);
+            }
+        }
+
+
     }
 
 }

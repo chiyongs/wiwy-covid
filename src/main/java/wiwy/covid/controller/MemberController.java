@@ -15,6 +15,7 @@ public class MemberController {
 
     private MemberService memberService;
 
+    // 회원 조회 매핑
     @GetMapping("/member/{memberId}")
     public String member(@PathVariable Long memberId, Model model) {
         Member findMember = memberService.findOne(memberId);

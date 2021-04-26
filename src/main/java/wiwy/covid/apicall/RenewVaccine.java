@@ -10,12 +10,13 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class RenewDisMsg {
+public class RenewVaccine {
 
     private final ApiExplorer apiExplorer;
 
-    @Scheduled(cron = "0 0/5 * * * *")
-    public void renewingDisMsg() throws IOException {
-        apiExplorer.updateDisMsg();
+    @Scheduled(cron = "0 5 9 * * *")
+    public void renewingVaccine() throws IOException {
+        apiExplorer.updateVaccine();
+        log.info("Update Vaccine");
     }
 }
