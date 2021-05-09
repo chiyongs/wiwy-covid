@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class DisMsgHeader {
+public class DisMsgHead {
     private int totalCount;
     private int numOfRows;
     private int pageNo;
     private String type;
+    private DisMsgResult result;
 }

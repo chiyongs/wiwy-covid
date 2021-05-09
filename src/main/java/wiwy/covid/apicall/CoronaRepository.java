@@ -22,7 +22,6 @@ public class CoronaRepository {
     public void save(CoronaDto coronaDto) {
         em.persist(coronaDto);
         log.info("CoronaDto saved, gubun = {}", coronaDto.getGubun());
-
     }
 
     public List<CoronaDto> findRecentCorona() {

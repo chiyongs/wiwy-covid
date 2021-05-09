@@ -39,6 +39,5 @@ public class DisMsgRepository {
                 .setFirstResult(0)
                 .setMaxResults(1)
                 .getResultList();
-
     }
 }

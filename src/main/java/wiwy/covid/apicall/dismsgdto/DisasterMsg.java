@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
-public class DisMsgTotal {
-    private DisMsgHeader head;
-    private DisMsgResult result;
+public class DisasterMsg {
+    private DisMsgHead head;
     private List<DisMsg> rows = new ArrayList<>();
 }

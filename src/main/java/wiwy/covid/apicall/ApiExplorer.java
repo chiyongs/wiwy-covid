@@ -1,6 +1,8 @@
 package wiwy.covid.apicall;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Component;
 import wiwy.covid.apicall.coronadto.CoronaDto;
 import wiwy.covid.apicall.coronadto.Response;
 import wiwy.covid.apicall.dismsgdto.DisMsg;
-import wiwy.covid.apicall.dismsgdto.DisMsgTotal;
+import wiwy.covid.apicall.dismsgdto.DisasterMsg;
 import wiwy.covid.apicall.vaccinedto.Vaccine;
 
 import javax.transaction.Transactional;
@@ -28,6 +30,7 @@ public class ApiExplorer {
     private final CoronaRepository coronaRepository;
     private final DisMsgRepository disMsgRepository;
     private final VaccineRepository vaccineRepository;
+//    private ObjectMapper xmlMapper = new XmlMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     private ObjectMapper xmlMapper = new XmlMapper();
 
     @Transactional
@@ -77,7 +80,9 @@ public class ApiExplorer {
     private void validateCoronaData(List<CoronaDto> items, Integer currentSeq) {
         List<CoronaDto> recentCorona = coronaRepository.findRecentCorona();
         int recentSeq = 0;
-        if(recentCorona != null) {
+
+        if(recentCorona != null && !recentCorona.isEmpty()) {
+            log.debug("recentCorona = {}", recentCorona);
             recentSeq = recentCorona.get(0).getSeq();
         }
         int validateSeq = currentSeq - recentSeq;
@@ -97,7 +102,7 @@ public class ApiExplorer {
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("인증키", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
-        urlBuilder.append("&" + URLEncoder.encode("type","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*호출문서 형식*/
+        urlBuilder.append("&" + URLEncoder.encode("type","UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8")); /*호출문서 형식*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -116,12 +121,15 @@ public class ApiExplorer {
         }
         rd.close();
         conn.disconnect();
-//        System.out.println(sb.toString());
+        System.out.println(sb.toString());
 
-        DisMsgTotal disMsgTotal = xmlMapper.readValue(sb.toString(), DisMsgTotal.class);
-        if(disMsgTotal.getResult().getResultCode() == 0 && disMsgTotal.getHead().getTotalCount() != 0) {
-            if(disMsgTotal.getRows() != null) {
+        DisasterMsg disMsgTotal = xmlMapper.readValue(sb.toString(), DisasterMsg.class);
+        if(disMsgTotal.getHead().getTotalCount() != 0) {
+            log.debug("disMsgTotal = {}", disMsgTotal.getHead().getTotalCount());
+            log.debug("getRows = {}", disMsgTotal.getRows());
+            if(disMsgTotal.getRows() != null && !disMsgTotal.getRows().isEmpty()) {
                 List<DisMsg> rows = disMsgTotal.getRows();
+                log.debug("getRows = {}", rows);
                 Integer currentSN = rows.get(0).getMd101_sn();
                 if(currentSN == null) {
                     currentSN = 0;

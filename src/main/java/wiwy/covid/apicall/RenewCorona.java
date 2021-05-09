@@ -19,7 +19,7 @@ public class RenewCorona {
     private final ApiExplorer apiExplorer;
 
 //    @Scheduled(fixedRate = 1000*60*5)
-//    @Scheduled(cron = "0/30 * * * * *")   // 10초마다
+//    @Scheduled(cron = "0/30 * * * * *")   // 30초마다
     @Scheduled(cron = "0 0/30 * * * *") // 30분마다
     public void renewingData() throws IOException {
         LocalDate currentDate = LocalDate.now();
@@ -34,6 +34,9 @@ public class RenewCorona {
 
         log.info("renew start");
         apiExplorer.fetching(curDate,curDate);
+//        apiExplorer.fetching("20210501","20210501");
+//        apiExplorer.fetching("20210502","20210502");
+//        apiExplorer.fetching("20210503","20210503");
         log.info("renew end");
     }
 }
