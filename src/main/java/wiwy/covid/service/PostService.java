@@ -3,6 +3,8 @@ package wiwy.covid.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import wiwy.covid.domain.Board;
+import wiwy.covid.domain.Member;
 import wiwy.covid.domain.Post;
 import wiwy.covid.repository.PostRepository;
 
@@ -14,15 +16,26 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final MemberService memberService;
+    private final BoardService boardService;
 
     @Transactional
-    public Long post(Post post) {
+    public Long post(Long memberId, Long boardId, String title, String content) {
+
+        Member member = memberService.findOne(memberId);
+        Board board = boardService.findOne(boardId);
+
+        Post post = Post.makePost(board, member, title, content);
         postRepository.save(post);
         return post.getId();
     }
 
     public List<Post> findPostsByName(String postName) {
         return postRepository.findByName(postName);
+    }
+
+    public List<Post> findPostsByBoardId(Long boardId) {
+        return postRepository.findPostsByBoardId(boardId);
     }
 
     public List<Post> findByMember(Long memberId) {

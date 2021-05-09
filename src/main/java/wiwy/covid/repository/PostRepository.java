@@ -39,7 +39,7 @@ public class PostRepository {
                 .getResultList();
     }
 
-    public List<Post> findPostsByBoardName(Long boardId) {
+    public List<Post> findPostsByBoardId(Long boardId) {
         return em.createQuery("select p from Post p join p.board b where b.boardId = :boardId", Post.class)
                 .setParameter("boardId", boardId)
                 .getResultList();

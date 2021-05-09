@@ -1,15 +1,41 @@
 package wiwy.covid.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import wiwy.covid.domain.Board;
+import wiwy.covid.domain.Post;
+import wiwy.covid.service.BoardService;
+import wiwy.covid.service.PostService;
+
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class BoardController {
 
-    @GetMapping("/board")
+    private final BoardService boardService;
+    private final PostService postService;
+
+    // 모든 게시판 보기
+    @GetMapping("/boards")
     @ResponseBody
-    public String board() {
+    public String viewAllBoards(Model model) {
+        List<Board> allBoards = boardService.findAllBoards();
+        model.addAttribute("allBoards", allBoards);
+        return "boards";
+    }
+
+    @GetMapping("/boards/{boardId}")
+    @ResponseBody
+    public String goBoard(@PathVariable Long boardId, Model model) {
+        List<Post> posts = postService.findPostsByBoardId(boardId);
+        Board board = boardService.findOne(boardId);
+        model.addAttribute("board", board);
+        model.addAttribute("posts",posts);
         return "board";
     }
 }
