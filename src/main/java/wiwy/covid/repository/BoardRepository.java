@@ -1,14 +1,13 @@
 package wiwy.covid.repository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import wiwy.covid.domain.Board;
-import wiwy.covid.domain.Member;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-@Service
+@Repository
 @RequiredArgsConstructor
 public class BoardRepository {
 
@@ -22,15 +21,9 @@ public class BoardRepository {
         return em.find(Board.class, boardId);
     }
 
-    public List<Board> findByMemberId(Long memberId) {
-        return em.createQuery("select b from Board b join b.member m where m.id = :memberId", Board.class)
-                .setParameter("memberId",memberId)
-                .getResultList();
-    }
-
     public List<Board> findByName(String boardName) {
-        return em.createQuery("select b from Board b where b.boardName = :boardName", Board.class)
-                .setParameter("boardName", boardName)
+        return em.createQuery("select b from Board b where b.boardName = :boardName",Board.class)
+                .setParameter("boardName",boardName)
                 .getResultList();
     }
 

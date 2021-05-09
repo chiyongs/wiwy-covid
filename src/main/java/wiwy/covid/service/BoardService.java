@@ -15,27 +15,16 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    @Transactional
-    public Long post(Board board) {
+    public Long makeBoard(Board board) {
         boardRepository.save(board);
         return board.getId();
-    }
-
-    public List<Board> findBoardsByName(String boardName) {
-        return boardRepository.findByName(boardName);
-    }
-
-    public List<Board> findByMember(Long memberId) {
-        return boardRepository.findByMemberId(memberId);
     }
 
     public Board findOne(Long boardId) {
         return boardRepository.findById(boardId);
     }
 
-    public List<Board> findBoards() {
-        return boardRepository.findAll();
+    public List<Board> findBoardByName(String boardName) {
+        return boardRepository.findByName(boardName);
     }
-
-
 }
