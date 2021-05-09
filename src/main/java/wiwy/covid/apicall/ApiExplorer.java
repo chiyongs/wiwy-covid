@@ -30,8 +30,8 @@ public class ApiExplorer {
     private final CoronaRepository coronaRepository;
     private final DisMsgRepository disMsgRepository;
     private final VaccineRepository vaccineRepository;
-//    private ObjectMapper xmlMapper = new XmlMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    private ObjectMapper xmlMapper = new XmlMapper();
+    private ObjectMapper xmlMapper = new XmlMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//    private ObjectMapper xmlMapper = new XmlMapper();
 
     @Transactional
     public void fetching(String startDate, String endDate) throws IOException {
@@ -126,37 +126,38 @@ public class ApiExplorer {
         DisasterMsg disMsgTotal = xmlMapper.readValue(sb.toString(), DisasterMsg.class);
         if(disMsgTotal.getHead().getTotalCount() != 0) {
             log.debug("disMsgTotal = {}", disMsgTotal.getHead().getTotalCount());
-            log.debug("getRows = {}", disMsgTotal.getRows());
-            if(disMsgTotal.getRows() != null && !disMsgTotal.getRows().isEmpty()) {
-                List<DisMsg> rows = disMsgTotal.getRows();
-                log.debug("getRows = {}", rows);
-                Integer currentSN = rows.get(0).getMd101_sn();
-                if(currentSN == null) {
-                    currentSN = 0;
-                }
-                validateDisMsgSN(rows, currentSN);
-            }
+            log.debug("disMSg = {}", disMsgTotal.getRow().getMd101_sn());
+//            log.debug("getRows = {}", disMsgTotal.getRows());
+//            if(disMsgTotal.getRows() != null && !disMsgTotal.getRows().isEmpty()) {
+//                List<DisMsg> rows = disMsgTotal.getRows();
+//                log.debug("getRows = {}", rows);
+//                Integer currentSN = rows.get(0).getMd101_sn();
+//                if(currentSN == null) {
+//                    currentSN = 0;
+//                }
+//                validateDisMsgSN(rows, currentSN);
+//            }
         }
     }
 
-    private void validateDisMsgSN(List<DisMsg> rows, Integer currentSN) {
-        List<DisMsg> recentDisMsg = disMsgRepository.findRecentDisMsg();
-        // 재난문자가 DB에 아예 없을 때 -> 초기상태
-        if(recentDisMsg == null) {
-            for (DisMsg disMsg : recentDisMsg) {
-                disMsgRepository.save(disMsg);
-            }
-            return;
-        }
-        int recentSN = recentDisMsg.get(0).getMd101_sn();
-        int validateSN = currentSN - recentSN;
-
-        if(validateSN != 0) {
-            for (int i = 0 ; i < validateSN ; i++) {
-                disMsgRepository.save(rows.get(i));
-            }
-        }
-    }
+//    private void validateDisMsgSN(List<DisMsg> rows, Integer currentSN) {
+//        List<DisMsg> recentDisMsg = disMsgRepository.findRecentDisMsg();
+//        // 재난문자가 DB에 아예 없을 때 -> 초기상태
+//        if(recentDisMsg == null) {
+//            for (DisMsg disMsg : recentDisMsg) {
+//                disMsgRepository.save(disMsg);
+//            }
+//            return;
+//        }
+//        int recentSN = recentDisMsg.get(0).getMd101_sn();
+//        int validateSN = currentSN - recentSN;
+//
+//        if(validateSN != 0) {
+//            for (int i = 0 ; i < validateSN ; i++) {
+//                disMsgRepository.save(rows.get(i));
+//            }
+//        }
+//    }
 
     @Transactional
     public void updateVaccine() throws IOException{

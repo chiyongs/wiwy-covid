@@ -9,5 +9,5 @@ import java.util.List;
 @Getter @Setter
 public class DisasterMsg {
     private DisMsgHead head;
-    private List<DisMsg> rows = new ArrayList<>();
+    private DisMsg row;
 }

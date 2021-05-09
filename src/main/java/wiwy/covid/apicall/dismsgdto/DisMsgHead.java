@@ -9,5 +9,5 @@ public class DisMsgHead {
     private int numOfRows;
     private int pageNo;
     private String type;
-    private DisMsgResult result;
+    private DisMsgResult RESULT;
 }

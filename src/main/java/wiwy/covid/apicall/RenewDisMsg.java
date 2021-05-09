@@ -14,8 +14,9 @@ public class RenewDisMsg {
 
     private final ApiExplorer apiExplorer;
 
-    @Scheduled(cron = "0/15 * * * * *")
-    public void renewingDisMsg() throws IOException {
-        apiExplorer.updateDisMsg();
-    }
+//    @Scheduled(cron = "0/15 * * * * *")
+//    @Scheduled(cron = "0/15 * * * * *")
+//    public void renewingDisMsg() throws IOException {
+//        apiExplorer.updateDisMsg();
+//    }
 }
