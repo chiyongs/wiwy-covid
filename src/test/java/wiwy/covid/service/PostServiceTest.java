@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import wiwy.covid.domain.Board;
 import wiwy.covid.domain.Post;
 import wiwy.covid.domain.Member;
 
@@ -20,6 +21,7 @@ class PostServiceTest {
     @Autowired
     PostService postService;
     @Autowired MemberService memberService;
+    @Autowired BoardService boardService;
 
     @Test
     void 저장() {
@@ -70,8 +72,33 @@ class PostServiceTest {
         Member member = new Member();
         member.setAge(25);
         member.setUserName("shin");
+        memberService.join(member);
 
         Post board = Post.makePost(member, "aaa", "bbb");
         postService.post(board);
+
+        Member findMember = memberService.findOne(board.getMember().getId());
+
+        assertThat(findMember).isEqualTo(member);
+    }
+
+    @Test
+    void 게시글의해당게시판조회() {
+        Member member = new Member();
+        member.setAge(25);
+        member.setUserName("shin");
+        memberService.join(member);
+
+        Board board = new Board();
+        board.setBoardName("자유게시판");
+        boardService.makeBoard(board);
+
+        Post post = Post.makePost(board, member,"예시","안녕");
+        postService.post(post);
+
+        Post findPost = postService.findOne(post.getId());
+
+        assertThat(findPost.getBoard().getBoardName()).isEqualTo(board.getBoardName());
+
     }
 }

@@ -16,21 +16,21 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Long post(Post board) {
-        postRepository.save(board);
-        return board.getId();
+    public Long post(Post post) {
+        postRepository.save(post);
+        return post.getId();
     }
 
-    public List<Post> findBoardsByName(String boardName) {
-        return postRepository.findByName(boardName);
+    public List<Post> findPostsByName(String postName) {
+        return postRepository.findByName(postName);
     }
 
     public List<Post> findByMember(Long memberId) {
         return postRepository.findByMemberId(memberId);
     }
 
-    public Post findOne(Long boardId) {
-        return postRepository.findById(boardId);
+    public Post findOne(Long postId) {
+        return postRepository.findById(postId);
     }
 
     public List<Post> findBoards() {

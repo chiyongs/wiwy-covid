@@ -2,14 +2,12 @@ package wiwy.covid.apicall;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import wiwy.covid.apicall.coronadto.CoronaDto;
 import wiwy.covid.apicall.coronadto.Response;
-import wiwy.covid.apicall.dismsgdto.DisMsg;
 import wiwy.covid.apicall.dismsgdto.DisasterMsg;
 import wiwy.covid.apicall.vaccinedto.Vaccine;
 

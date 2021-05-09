@@ -2,6 +2,7 @@ package wiwy.covid.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import wiwy.covid.domain.Board;
 import wiwy.covid.domain.Post;
 
 import javax.persistence.EntityManager;
@@ -35,6 +36,12 @@ public class PostRepository {
 
     public List<Post> findAll() {
         return em.createQuery("select p from Post p", Post.class)
+                .getResultList();
+    }
+
+    public List<Post> findPostsByBoardName(Long boardId) {
+        return em.createQuery("select p from Post p join p.board b where b.boardId = :boardId", Post.class)
+                .setParameter("boardId", boardId)
                 .getResultList();
     }
 }
