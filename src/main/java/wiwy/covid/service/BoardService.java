@@ -15,9 +15,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public Long makeBoard(String boardName) {
-        Board board = new Board();
-        board.setBoardName(boardName);
+    public Long makeBoard(Board board) {
         boardRepository.save(board);
         return board.getId();
     }

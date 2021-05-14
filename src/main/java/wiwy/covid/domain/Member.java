@@ -19,4 +19,10 @@ public class Member {
     private String userName;
     private Integer age;
 
+    private String phoneNumber;
+
+    private String zipcode;
+    private String street;
+    private String city;
+
 }
