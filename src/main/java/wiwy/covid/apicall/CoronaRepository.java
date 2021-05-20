@@ -31,5 +31,12 @@ public class CoronaRepository {
                 .getResultList();
     }
 
+    public List<CoronaDto> findCoronaPerDay() {
+        return em.createQuery("select c from CoronaDto c order by c.seq desc",CoronaDto.class)
+                .setFirstResult(0)
+                .setMaxResults(18)
+                .getResultList();
+    }
+
 
 }
