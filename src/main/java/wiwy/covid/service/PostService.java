@@ -50,5 +50,9 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public Long deletePost (Long postId) {
+        return postRepository.delete(postId);
+    }
+
 
 }

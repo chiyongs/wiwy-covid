@@ -36,4 +36,22 @@ public class PostController {
     public String addPost(Post post, RedirectAttributes redirectAttributes) {
         return "ok";
     }
+
+//    @GetMapping("/board/{boardId}/{postId}/delete")
+//    public String deletePost(@PathVariable Long postId) {}
+
+    @GetMapping("/board/{boardId}/edit")
+    public String editPost(@PathVariable Long boardId, Model model) {
+        Post post = postService.findOne(boardId);
+        model.addAttribute("post", post);
+        return "basic/editForm";
+    }
+
+//    @PostMapping("/{itemId}/edit")
+//    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+//        itemRepository.update(itemId, item);
+//        return "redirect:/basic/items/{itemId}";
+//    }
+
+
 }

@@ -22,32 +22,33 @@ public class BoardController {
     private final BoardService boardService;
     private final PostService postService;
 
-    // 모든 게시판 보기
-    @GetMapping("/boards")
+    @GetMapping("/")
     public String viewAllBoards(Model model) {
-        List<Board> allBoards = boardService.findAllBoards();
-        model.addAttribute("allBoards", allBoards);
-        return "boards";
+        List<Board> boards = boardService.findAllBoards();
+        model.addAttribute("boards", boards);
+        return "board/main";
     }
 
-    @GetMapping("/boards/{boardId}")
-    public String goBoard(@PathVariable Long boardId, Model model) {
-        List<Post> posts = postService.findPostsByBoardId(boardId);
+    // 특정 게시판 보기
+    @GetMapping("/{boardId}")
+    public String viewOneBoard(@PathVariable Long boardId, Model model) {
         Board board = boardService.findOne(boardId);
-        model.addAttribute("board", board);
-        model.addAttribute("posts",posts);
-        return "board";
+        List<Post> posts = postService.findPostsByBoardId(boardId);
+        model.addAttribute("board",board);
+        model.addAttribute("posts", posts);
+
+        return "board/{boardId}";
     }
 
-    @GetMapping("/boards/add")
-    public String makeBoard() {
+    @GetMapping("/addBoard")
+    public String getEditBoard() {
         return "board/addForm";
     }
 
-    @PostMapping("/boards/add")
-    public String addBoard(Board board, RedirectAttributes redirectAttributes) {
+    @PostMapping("/addBoard")
+    public String postEditBoard(Board board, RedirectAttributes redirectAttributes) {
         Long boardId = boardService.makeBoard(board);
-        redirectAttributes.addAttribute("boardId",boardId);
+        redirectAttributes.addAttribute("boardId", boardId);
         return "redirect:/board/{boardId}";
     }
 

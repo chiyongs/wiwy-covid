@@ -44,4 +44,10 @@ public class PostRepository {
                 .setParameter("boardId", boardId)
                 .getResultList();
     }
+
+    public Long delete (Long postId) {
+        Post post = findById(postId);
+        em.remove(post);
+        return postId;
+    }
 }

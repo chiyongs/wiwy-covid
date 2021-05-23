@@ -31,4 +31,10 @@ public class MemberRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
+
+    public Long delete(Long memberId) {
+        Member member = findById(memberId);
+        em.remove(member);
+        return memberId;
+    }
 }

@@ -20,4 +20,10 @@ public class CommentRepository {
         return em.find(Comment.class, commentId);
     }
 
+    public Long delete(Long commentId) {
+        Comment comment = findById(commentId);
+        em.remove(comment);
+        return commentId;
+    }
+
 }

@@ -31,4 +31,8 @@ public class BoardService {
     public List<Board> findAllBoards() {
         return boardRepository.findAll();
     }
+
+    public Long deleteBoard(Long boardId) {
+        return boardRepository.delete(boardId);
+    }
 }

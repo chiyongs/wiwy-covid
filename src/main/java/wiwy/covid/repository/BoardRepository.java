@@ -31,4 +31,10 @@ public class BoardRepository {
         return em.createQuery("select b from Board b", Board.class)
                 .getResultList();
     }
+
+    public Long delete(Long boardId) {
+        Board board = findById(boardId);
+        em.remove(board);
+        return boardId;
+    }
 }
