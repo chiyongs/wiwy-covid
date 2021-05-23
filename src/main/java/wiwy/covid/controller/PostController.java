@@ -10,12 +10,41 @@ import wiwy.covid.domain.Post;
 import wiwy.covid.service.BoardService;
 import wiwy.covid.service.PostService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class PostController {
 
     private final BoardService boardService;
     private final PostService postService;
+
+    // 특정 게시판에 존재하는 특정 게시글 보기
+    @GetMapping("/{boardId}/view/{postId}")
+    public String viewPost(@PathVariable Long boardId, @PathVariable Long postId, Model model) {
+        Board board = boardService.findOne(boardId);
+        Post post = postService.findOne(postId);
+        model.addAttribute("board", board);
+        model.addAttribute("post", post);
+        return "post/{postId}";
+    }
+
+    // 특정 게시판에 게시글 생성
+    @GetMapping("/{boardId}/add")
+    public String getAddPost() {
+        return "post/addPostForm";
+    }
+
+    // 특정 게시판에 게시글 생성
+    @PostMapping("/{boardId}/add")
+    public String postAddPost(Post post, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        HttpSession session = request.getSession();
+
+//        postService.post(post);
+        return "ok";
+    }
+
 
     @GetMapping("/board/{boardId}/{postId}}")
     @ResponseBody

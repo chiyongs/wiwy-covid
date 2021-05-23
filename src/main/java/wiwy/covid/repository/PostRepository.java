@@ -40,7 +40,7 @@ public class PostRepository {
     }
 
     public List<Post> findPostsByBoardId(Long boardId) {
-        return em.createQuery("select p from Post p join p.board b where b.boardId = :boardId", Post.class)
+        return em.createQuery("select p from Post p join p.board b where b.id = :boardId", Post.class)
                 .setParameter("boardId", boardId)
                 .getResultList();
     }
@@ -50,4 +50,14 @@ public class PostRepository {
         em.remove(post);
         return postId;
     }
+
+    // pageNum 수에 맞추어 페이징하여 게시글 find
+    public List<Post> pagingPosts(Long boardId, int page, int perPageNum) {
+        return em.createQuery("select p from Post p join p.board b where b.id = :boardId order by p.id", Post.class)
+                .setParameter("boardId", boardId)
+                .setFirstResult(page)
+                .setMaxResults(perPageNum)
+                .getResultList();
+    }
+
 }

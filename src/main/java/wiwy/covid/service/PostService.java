@@ -54,5 +54,9 @@ public class PostService {
         return postRepository.delete(postId);
     }
 
+    public List<Post> pagingPosts (Long boardId, int page, int perPageNum) {
+        return postRepository.pagingPosts(boardId, page, perPageNum);
+    }
+
 
 }
