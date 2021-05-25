@@ -19,6 +19,8 @@ public class Member {
     private String userName;
     private Integer age;
 
+    private String password;
+
     private String phoneNumber;
 
     private String zipcode;

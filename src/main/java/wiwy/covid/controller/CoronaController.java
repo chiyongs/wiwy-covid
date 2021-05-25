@@ -15,13 +15,12 @@ public class CoronaController {
 
     private final CoronaRepository coronaRepository;
 
-    @GetMapping("/covid19")
-    @ResponseBody
+    @GetMapping("/")
     public String showCovid() {
         List<CoronaDto> coronaPerDay = coronaRepository.findCoronaPerDay();
         for (CoronaDto coronaDto : coronaPerDay) {
             System.out.println(coronaDto.getGubun());
         }
-        return "ok";
+        return "main";
     }
 }
