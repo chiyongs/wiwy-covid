@@ -2303,6 +2303,7 @@ a {
   transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
   border-bottom: dotted 1px;
   color: #f56a6a;
+
   text-decoration: none;
 }
 
@@ -2904,6 +2905,7 @@ ul.contact li:before {
   color: #f56a6a;
   display: inline-block;
   font-size: 1.5em;
+  font-weight: bold;
   height: 1.125em;
   left: 0;
   line-height: 1.125em;
@@ -3169,7 +3171,7 @@ button,
   display: inline-block;
   font-family: "Roboto Slab", serif;
   font-size: 0.8em;
-  font-weight: 700;
+  font-weight: 10000;
   height: 3.5em;
   letter-spacing: 0.075em;
   line-height: 3.5em;
@@ -4365,4 +4367,19 @@ button:disabled,
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.btn-row .col {
+  padding: 10px;
+}
+.btn-row label {
+  width: 100px;
+  margin-bottom: 0px;
 }
