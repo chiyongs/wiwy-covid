@@ -69,14 +69,19 @@ public class BoardController {
 
     @GetMapping("/addBoard")
     public String getEditBoard() {
-
         return "board/addBoardForm";
     }
 
     @PostMapping("/addBoard")
     public String postEditBoard(Board board, RedirectAttributes redirectAttributes) {
-        Long boardId = boardService.makeBoard(board);
-        redirectAttributes.addAttribute("boardId", boardId);
+        try {
+            Long boardId = boardService.makeBoard(board);
+            redirectAttributes.addAttribute("boardId", boardId);
+        } catch (IllegalStateException e) {
+            redirectAttributes.addAttribute("dup",true);
+            return "redirect:/addBoard";
+        }
+
         return "redirect:/{boardId}";
     }
 
