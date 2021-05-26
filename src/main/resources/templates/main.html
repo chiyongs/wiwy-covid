@@ -81,17 +81,17 @@
                   </div>
                   <div id="twobox">
                     <p align="center">격리해제</p>
-                    <span></span>
+                    <span th:text="${coronaToday.isolClearCnt}"></span>
                   </div>
                 </div>
                 <div class="data">
                   <div id="threebox">
                     <p align="center">격리중</p>
-                    <span></span>
+                    <span th:text="${coronaToday.isolIngCnt}"></span>
                   </div>
                   <div id="fourbox">
                     <p align="center">사망</p>
-                    <span></span>
+                    <span th:text="${coronaToday.deathCnt}"></span>
                   </div>
                 </div>
               </div>
