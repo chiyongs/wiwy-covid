@@ -39,4 +39,24 @@ public class RenewCorona {
 //        apiExplorer.fetching("20210503","20210503");
         log.info("renew end");
     }
+
+    @Scheduled(cron = "0 0/30 * * * *") // 30분마다
+    public void renewingAbrCoronaData() throws IOException {
+        LocalDate currentDate = LocalDate.now();
+        LocalDateTime curTime = LocalDateTime.now();
+        String curDate;
+        if(curTime.getHour() < 9) {
+            curDate = LocalDate.of(currentDate.getYear(), currentDate.getMonth(), currentDate.getDayOfMonth()-1).format(DateTimeFormatter.BASIC_ISO_DATE);
+        } else {
+            curDate = LocalDate.of(currentDate.getYear(), currentDate.getMonth(), currentDate.getDayOfMonth()).format(DateTimeFormatter.BASIC_ISO_DATE);
+        }
+        log.debug("curDate = {}", curDate);
+
+        log.info("renew start");
+        apiExplorer.fetching(curDate,curDate);
+//        apiExplorer.fetching("20210501","20210501");
+//        apiExplorer.fetching("20210502","20210502");
+//        apiExplorer.fetching("20210503","20210503");
+        log.info("renew end");
+    }
 }

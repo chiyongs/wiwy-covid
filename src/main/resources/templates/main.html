@@ -277,6 +277,12 @@
                 </tr>
               </thead>
               <tbody class="tbody">
+                <tr th:each="abroad : ${abroads}">
+                  <td th:text="${abroadStat.count}"></td>
+                  <td th:text="${abroad.nationNm}"></td>
+                  <td th:text="${abroad.natDefCnt}"></td>
+                  <td th:text="${abroad.natDeathCnt}"></td>
+                </tr>
                 <tr class="tabel-tr">
                   <th class="th-1">1</th>
                   <th class="th-2"></th>
