@@ -280,7 +280,7 @@
               <div class="mini-posts">
                 <article id="mypage">
                   <a href="#" class="image"
-                    ><img src="../../static/images/pic06.jpg" alt=""
+                    ><img th:src="@{images/pic06.jpg}" src="../../static/images/pic06.jpg" alt=""
                   /></a>
                   <p align="center">
                     커뮤니티 이용을 위해 <br />회원가입이 필요합니다!
@@ -302,21 +302,21 @@
                   <a
                     href="https://blog.naver.com/mohw2016/222358574027"
                     class="image"
-                    ><img src="../../static/images/picture1.png" alt=""
+                    ><img th:src="@{images/picture1.png}" src="../../static/images/picture1.png" alt=""
                   /></a>
                 </article>
                 <article>
                   <a
                     href="http://ncov.mohw.go.kr/infoBoardView.do?brdId=3&brdGubun=32&dataGubun=328&ncvContSeq=4720&contSeq=4720&board_id=&gubun="
                     class="image"
-                    ><img src="../../static/images/picture2.png" alt=""
+                    ><img th:src="@{images/picture2.png}" src="../../static/images/picture2.png" alt=""
                   /></a>
                 </article>
                 <article>
                   <a
                     href="https://www.youtube.com/watch?v=6e3JLnOMPQk"
                     class="image"
-                    ><img src="../../static/images/picture3.png" alt=""
+                    ><img th:src="@{images/picture3.png}" src="../../static/images/picture3.png" alt=""
                   /></a>
                 </article>
               </div>
@@ -391,13 +391,13 @@
       </div>
 
       <!-- Scripts -->
-      <script src="../../static/js/jquery.min.js"></script>
-      <script src="../../static/js/skel.min.js"></script>
-      <script src="../../static/js/util.js"></script>
+      <script th:src="@{js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+      <script th:src="@{js/skel.min.js}" src="../../static/js/skel.min.js"></script>
+      <script th:src="@{js/util.js}" src="../../static/js/util.js"></script>
       <!--[if lte IE 8
         ]><script src="assets/js/ie/respond.min.js"></script
       ><![endif]-->
-      <script src="../../static/js/index.js"></script>
+      <script th:src="@{js/index.js}" src="../../static/js/index.js"></script>
     </body>
   </html>
 </html>
