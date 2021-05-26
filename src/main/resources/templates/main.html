@@ -62,8 +62,8 @@
               <div class="data">
                 <div id="onebox">
                   <p align="center">확진환자</p>
-                  <span></span>
-                  <span id="datenum">+ </span>
+                  <span th:text="${coronaToday.defCnt}"></span>
+                  <span id="datenum" th:text="|+${coronaToday.incDec}|">+ </span>
                 </div>
                 <div id="twobox">
                   <p align="center">격리해제</p>

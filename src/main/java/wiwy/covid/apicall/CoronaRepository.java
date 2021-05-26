@@ -34,7 +34,14 @@ public class CoronaRepository {
     public List<CoronaDto> findCoronaPerDay() {
         return em.createQuery("select c from CoronaDto c order by c.seq desc",CoronaDto.class)
                 .setFirstResult(0)
-                .setMaxResults(18)
+                .setMaxResults(19)
+                .getResultList();
+    }
+
+    public List<CoronaDto> findHapGae() {
+        return em.createQuery("select c from CoronaDto c order by c.seq desc", CoronaDto.class)
+                .setFirstResult(18)
+                .setMaxResults(1)
                 .getResultList();
     }
 
