@@ -16,19 +16,23 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final MemberService memberService;
-    private final BoardService boardService;
 
     @Transactional
-    public Long post(Long memberId, Long boardId, String title, String content) {
-
-        Member member = memberService.findOne(memberId);
-        Board board = boardService.findOne(boardId);
-
-        Post post = Post.makePost(board, member, title, content);
-        postRepository.save(post);
-        return post.getId();
+    public Long post(Board board, Post p) {
+        Post newPost = Post.makePost(board, p.getPostName(), p.getContent());
+        postRepository.save(newPost);
+        return newPost.getId();
     }
+//    @Transactional
+//    public Long post(Long memberId, Long boardId, String title, String content) {
+//
+//        Member member = memberService.findOne(memberId);
+//        Board board = boardService.findOne(boardId);
+//
+//        Post post = Post.makePost(board, member, title, content);
+//        postRepository.save(post);
+//        return post.getId();
+//    }
 
     public List<Post> findPostsByName(String postName) {
         return postRepository.findByName(postName);

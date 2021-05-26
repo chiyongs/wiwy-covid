@@ -38,49 +38,12 @@ public class PostController {
 
     // 특정 게시판에 게시글 생성
     @PostMapping("/{boardId}/add")
-    public String postAddPost(Post post, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        HttpSession session = request.getSession();
-
-//        postService.post(post);
-        return "ok";
-    }
-
-
-    @GetMapping("/board/{boardId}/{postId}}")
-    @ResponseBody
-    public String post(@PathVariable Long boardId, @PathVariable Long postId, Model model) {
+    public String postAddPost(@PathVariable Long boardId, Post post, RedirectAttributes redirectAttributes) {
         Board board = boardService.findOne(boardId);
-        Post post = postService.findOne(postId);
-
-        model.addAttribute("post", post);
-        return "ok";
+        Long postId = postService.post(board, post);
+        redirectAttributes.addAttribute("boardId", boardId);
+        redirectAttributes.addAttribute("postId",postId);
+        return "redirect:/{boardId}/view/{postId}";
     }
-
-    @GetMapping("/board/{boardId}/add")
-    public String makePost() {
-        return "post/addForm";
-    }
-
-    @PostMapping("/board/{boardId}/add")
-    public String addPost(Post post, RedirectAttributes redirectAttributes) {
-        return "ok";
-    }
-
-//    @GetMapping("/board/{boardId}/{postId}/delete")
-//    public String deletePost(@PathVariable Long postId) {}
-
-    @GetMapping("/board/{boardId}/edit")
-    public String editPost(@PathVariable Long boardId, Model model) {
-        Post post = postService.findOne(boardId);
-        model.addAttribute("post", post);
-        return "basic/editForm";
-    }
-
-//    @PostMapping("/{itemId}/edit")
-//    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
-//        itemRepository.update(itemId, item);
-//        return "redirect:/basic/items/{itemId}";
-//    }
-
 
 }

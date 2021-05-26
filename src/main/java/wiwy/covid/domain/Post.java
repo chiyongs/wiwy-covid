@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -29,6 +31,16 @@ public class Post {
     @JoinColumn(name = "board_id")
     private Board board;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
+
+    //연관관계 메서드
+    public void addComments(Comment comment) {
+        comments.add(comment);
+        comment.setPost(this);
+    }
+
     private Post() {
     }
 
@@ -46,12 +58,11 @@ public class Post {
         return post;
     }
 
-    public static Post makePost(Board board, Member member, String postName, String content) {
+    public static Post makePost(Board board, String postName, String content) {
         Post post = new Post();
         post.setBoard(board);
         post.setPostName(postName);
         post.setContent(content);
-        post.setMember(member);
 
         return post;
     }
