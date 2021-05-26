@@ -15,6 +15,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    @Transactional
     public Long makeBoard(Board board) {
         boardRepository.save(board);
         return board.getId();

@@ -71,12 +71,12 @@
                 </p>
                 <ul class="actions">
                   <li>
-                    <a href="../main.html" class="button big">정보 알아보기</a>
+                    <a th:href="@{/}" href="../main.html" class="button big">정보 알아보기</a>
                   </li>
                 </ul>
               </div>
               <span class="image object">
-                <img src="../../static/images/covid.png" alt="" />
+                <img th:src="@{images/covid.png}" src="../../static/images/covid.png" alt="" />
               </span>
             </section>
 
@@ -111,7 +111,7 @@
                     </a>
                   </div>
                   <ul class="actions" id="actions-more">
-                    <li><a href="board_main.html" class="button">More</a></li>
+                    <li><a th:href="@{/1}" href="board_main.html" class="button">More</a></li>
                   </ul>
                 </article>
 

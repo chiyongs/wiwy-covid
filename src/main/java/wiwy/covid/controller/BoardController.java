@@ -77,7 +77,7 @@ public class BoardController {
     public String postEditBoard(Board board, RedirectAttributes redirectAttributes) {
         Long boardId = boardService.makeBoard(board);
         redirectAttributes.addAttribute("boardId", boardId);
-        return "redirect:/board/{boardId}";
+        return "redirect:/{boardId}";
     }
 
 
