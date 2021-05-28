@@ -2938,6 +2938,12 @@ ul.actions {
   list-style: none;
   padding-left: 0;
 }
+#actions-more-post {
+  display: table;
+  margin-left: auto;
+  margin-right: 30px;
+  margin-top: -50px;
+}
 #actions-more {
   display: table;
   margin-left: auto;
@@ -4382,4 +4388,9 @@ button:disabled,
 .btn-row label {
   width: 100px;
   margin-bottom: 0px;
+}
+.check {
+  display: flex;
+  justify-content: center;
+  padding-left: 900px;
 }
