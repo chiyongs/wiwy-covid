@@ -71,12 +71,18 @@
                 </p>
                 <ul class="actions">
                   <li>
-                    <a th:href="@{/}" href="../main.html" class="button big">정보 알아보기</a>
+                    <a th:href="@{/}" href="../main.html" class="button big"
+                      >정보 알아보기</a
+                    >
                   </li>
                 </ul>
               </div>
               <span class="image object">
-                <img th:src="@{images/covid.png}" src="../../static/images/covid.png" alt="" />
+                <img
+                  th:src="@{images/covid.png}"
+                  src="../../static/images/covid.png"
+                  alt=""
+                />
               </span>
             </section>
 
@@ -111,7 +117,11 @@
                     </a>
                   </div>
                   <ul class="actions" id="actions-more">
-                    <li><a th:href="@{/1}" href="board_main.html" class="button">More</a></li>
+                    <li>
+                      <a th:href="@{/1}" href="board_main.html" class="button"
+                        >More</a
+                      >
+                    </li>
                   </ul>
                 </article>
 
@@ -203,30 +213,58 @@
                 </article>
 
                 <article>
-                  <a href="#" class="image"
-                    ><img src="../../static/images/pic06.jpg" alt=""
-                  /></a>
-                  <h3>Feugiat lorem aenean</h3>
-                  <p>
-                    Aenean ornare velit lacus, ac varius enim lorem ullamcorper
-                    dolore. Proin aliquam facilisis ante interdum. Sed nulla
-                    amet lorem feugiat tempus aliquam.
-                  </p>
-                  <ul class="actions">
+                  <div class="board">
+                    <h3>코로나검사게시판</h3>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>가나다라마바사아자차카타파하</p>
+                    </a>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>라마바</p>
+                    </a>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>사아자</p>
+                    </a>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>사아자</p>
+                    </a>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>사아자</p>
+                    </a>
+                  </div>
+                  <ul class="actions" id="actions-more">
                     <li><a href="#" class="button">More</a></li>
                   </ul>
                 </article>
                 <article>
-                  <a href="#" class="image"
-                    ><img src="../../static/images/pic06.jpg" alt=""
-                  /></a>
-                  <h3>Amet varius aliquam</h3>
-                  <p>
-                    Aenean ornare velit lacus, ac varius enim lorem ullamcorper
-                    dolore. Proin aliquam facilisis ante interdum. Sed nulla
-                    amet lorem feugiat tempus aliquam.
-                  </p>
-                  <ul class="actions">
+                  <div class="board">
+                    <h3>자가격리게시판</h3>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>가나다라마바사아자차카타파하</p>
+                    </a>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>라마바</p>
+                    </a>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>사아자</p>
+                    </a>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>사아자</p>
+                    </a>
+                    <a class="list" href="#">
+                      <time>방금</time>
+                      <p>사아자</p>
+                    </a>
+                  </div>
+                  <ul class="actions" id="actions-more">
                     <li><a href="#" class="button">More</a></li>
                   </ul>
                 </article>
@@ -266,6 +304,8 @@
                     <li><a href="#">비밀게시판</a></li>
                     <li><a href="#">정보공유게시판</a></li>
                     <li><a href="#">백신게시판</a></li>
+                    <li><a href="#">코로나검사게시판</a></li>
+                    <li><a href="#">자가격리게시판</a></li>
                   </ul>
                 </li>
                 <li><a href="#">항목 추가하기</a></li>
@@ -280,7 +320,10 @@
               <div class="mini-posts">
                 <article id="mypage">
                   <a href="#" class="image"
-                    ><img th:src="@{images/pic06.jpg}" src="../../static/images/pic06.jpg" alt=""
+                    ><img
+                      th:src="@{images/pic06.jpg}"
+                      src="../../static/images/pic06.jpg"
+                      alt=""
                   /></a>
                   <p align="center">
                     커뮤니티 이용을 위해 <br />회원가입이 필요합니다!
@@ -302,21 +345,30 @@
                   <a
                     href="https://blog.naver.com/mohw2016/222358574027"
                     class="image"
-                    ><img th:src="@{images/picture1.png}" src="../../static/images/picture1.png" alt=""
+                    ><img
+                      th:src="@{images/picture1.png}"
+                      src="../../static/images/picture1.png"
+                      alt=""
                   /></a>
                 </article>
                 <article>
                   <a
                     href="http://ncov.mohw.go.kr/infoBoardView.do?brdId=3&brdGubun=32&dataGubun=328&ncvContSeq=4720&contSeq=4720&board_id=&gubun="
                     class="image"
-                    ><img th:src="@{images/picture2.png}" src="../../static/images/picture2.png" alt=""
+                    ><img
+                      th:src="@{images/picture2.png}"
+                      src="../../static/images/picture2.png"
+                      alt=""
                   /></a>
                 </article>
                 <article>
                   <a
                     href="https://www.youtube.com/watch?v=6e3JLnOMPQk"
                     class="image"
-                    ><img th:src="@{images/picture3.png}" src="../../static/images/picture3.png" alt=""
+                    ><img
+                      th:src="@{images/picture3.png}"
+                      src="../../static/images/picture3.png"
+                      alt=""
                   /></a>
                 </article>
               </div>
@@ -391,8 +443,14 @@
       </div>
 
       <!-- Scripts -->
-      <script th:src="@{js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
-      <script th:src="@{js/skel.min.js}" src="../../static/js/skel.min.js"></script>
+      <script
+        th:src="@{js/jquery.min.js}"
+        src="../../static/js/jquery.min.js"
+      ></script>
+      <script
+        th:src="@{js/skel.min.js}"
+        src="../../static/js/skel.min.js"
+      ></script>
       <script th:src="@{js/util.js}" src="../../static/js/util.js"></script>
       <!--[if lte IE 8
         ]><script src="assets/js/ie/respond.min.js"></script
