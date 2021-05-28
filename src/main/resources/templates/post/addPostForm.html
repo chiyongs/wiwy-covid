@@ -21,7 +21,7 @@
         <div class="inner">
           <!-- Header -->
           <header id="header">
-            <a href="community.html" class="logo"
+            <a th:href="@{/co}" href="community.html" class="logo"
               ><strong>코로나 시대</strong> 살아남기</a
             >
             <ul class="icons">
@@ -62,26 +62,22 @@
 
             <!-- <h4 class="mb-3">게시판 입력</h4> -->
             <form action="board_main.html" th:action method="post">
-              <h2
-                th:if="${param.dup}"
-                th:text="'중복된 게시판명입니다! 다시 입력해주세요'"
-              ></h2>
               <div class="btn-row">
-                <label for="boardName">제목</label>
+                <label for="postName">제목</label>
                 <input
                   type="text"
-                  id="boardName"
-                  name="boardName"
+                  id="postName"
+                  name="postName"
                   class="form-control"
                   placeholder="게시판 이름을 입력하세요"
                 />
               </div>
               <div class="btn-row">
-                <label for="boardName">내용</label>
+                <label for="content">내용</label>
                 <input
                   type="text"
-                  id="postName"
-                  name="postName"
+                  id="content"
+                  name="content"
                   class="form-control"
                   placeholder="내용을 입력하세요"
                   style="height: 500px"

@@ -67,7 +67,7 @@
               </p>
               <ul class="actions post" id="actions-more-post">
                 <li>
-                  <a href="addPostForm.html" class="button">Post</a>
+                  <a th:href="@{/{boardId}/add(boardId=${board.id})}" href="addPostForm.html" class="button">Post</a>
                 </li>
               </ul>
               <div class="article-container">
@@ -436,11 +436,11 @@
       </div>
 
       <!-- Scripts -->
-      <script src="../../static/js/jquery.min.js"></script>
-      <script src="../../static/js/skel.min.js"></script>
-      <script src="../../static/js/util.js"></script>
+      <script th:src="@{js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+      <script th:src="@{js/skel.min.js}" src="../../static/js/skel.min.js"></script>
+      <script th:src="@{js/util.js}" src="../../static/js/util.js"></script>
 
-      <script src="../../static/js/index.js"></script>
+      <script th:src="@{js/index.js}" src="../../static/js/index.js"></script>
     </body>
   </html>
 </html>
