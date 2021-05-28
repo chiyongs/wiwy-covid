@@ -68,7 +68,7 @@
               <ul class="actions post" id="actions-more-post">
                 <li>
                   <a
-                    th:href="@{/{boardId}/add(boardId=${board.id})}"
+                    th:href="@{/{boardId}(boardId=${board.id})}"
                     href="../board/board_main.html"
                     class="button"
                     >List</a
@@ -86,7 +86,7 @@
                       class="article-title"
                       style="padding-top: 2vh; font-size: 1.6rem"
                     >
-                      <strong>가나다라마바사</strong>
+                      <strong th:text="${post.postName}">가나다라마바사</strong>
                     </h2>
                     <hr />
                     <div class="article-post">
@@ -107,6 +107,7 @@
                       <div>
                         <br />
                         <p
+                                th:text="${post.content}"
                           class="article-text"
                           style="font-size: 1rem; color: rgb(134, 131, 131)"
                         >

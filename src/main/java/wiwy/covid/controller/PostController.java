@@ -27,7 +27,7 @@ public class PostController {
         Post post = postService.findOne(postId);
         model.addAttribute("board", board);
         model.addAttribute("post", post);
-        return "post/{postId}";
+        return "post/post_main";
     }
 
     // 특정 게시판에 게시글 생성
