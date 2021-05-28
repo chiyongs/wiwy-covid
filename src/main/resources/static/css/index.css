@@ -4317,6 +4317,9 @@ button:disabled,
   background-color: rgb(255, 255, 255);
   display: block;
 }
+.article-info {
+  height: 70vh !important;
+}
 .article-box {
   height: 100%;
   width: 100%;
@@ -4324,7 +4327,12 @@ button:disabled,
   display: block;
   color: white;
 }
-
+.article-post {
+  background-color: #ffffff;
+  height: 84%;
+  display: block;
+  padding: 10px 10px 10px 10px;
+}
 .article-title {
   margin-right: 10px;
   height: 14px;
