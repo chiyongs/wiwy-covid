@@ -35,7 +35,7 @@ a {
   height: 100%;
   margin-top: 100px;
   /* margin-bottom: 200px; */
-  background-color: teal;
+  background-color: rgb(255, 255, 255);
 }
 .content-section h1 {
   font-size: 9vw;
@@ -233,9 +233,9 @@ a {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .dailyCovidStatus {
-  background-color: violet;
+  background-color: rgb(255, 255, 255);
   width: 90vw;
-  height: 90vw;
+  height: 50vw;
 }
 #onebox {
   background-color: rgb(49, 49, 168);
@@ -331,6 +331,7 @@ footer {
   height: 30vh;
   width: 100v;
 }
+
 @media (min-width: 1024px) {
   .navbar-links a:not(.navbar-logo) {
     margin-left: 2em;
@@ -385,7 +386,8 @@ footer {
     text-align: center;
   }
   .coronaboard {
-    background-color: tomato;
+    background-color: rgb(255, 255, 255);
+    margin-left: 3vw;
   }
   .coronaboard p {
     font-size: 1.2rem;
@@ -400,9 +402,9 @@ footer {
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   }
   .dailyCovidStatus {
-    background-color: violet;
+    background-color: rgb(255, 255, 255);
     width: 40vw;
-    height: 40vw;
+    height: 30vw;
   }
   .map {
     width: 40vw;
