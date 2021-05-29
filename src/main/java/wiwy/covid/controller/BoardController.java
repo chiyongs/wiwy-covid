@@ -45,7 +45,6 @@ public class BoardController {
         List<Post> posts = postService.pagingPosts(boardId, 0, 10);
 
         List<PostDTO> postDTOS = new ArrayList<>();
-        List<String> postTimes = new ArrayList<>();
         for (Post post : posts) {
             PostDTO postDTO = new PostDTO();
             postDTO.setPost(post);
@@ -75,15 +74,18 @@ public class BoardController {
 
         List<Post> returnPosts = postService.pagingPosts(boardId, bp.getPaging().getPageStart(), 10);
 
-        List<String> postTimes = new ArrayList<>();
-        for (Post post : posts) {
-            postTimes.add(post.calculateTime(post.getCreateTime()));
+        List<PostDTO> postDTOS = new ArrayList<>();
+        for (Post post : returnPosts) {
+            PostDTO postDTO = new PostDTO();
+            postDTO.setPost(post);
+            postDTO.setPostTime(post.calculateTime(post.getCreateTime()));
+            postDTOS.add(postDTO);
         }
 
         model.addAttribute("board", board);
         model.addAttribute("bp", bp);
-        model.addAttribute("posts", returnPosts);
-        model.addAttribute("postTimes",postTimes);
+        model.addAttribute("postDTOS", postDTOS);
+
 
         return "/board/main";
     }
