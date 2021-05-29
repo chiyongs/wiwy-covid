@@ -159,6 +159,24 @@
             <h1>시도별 확진자 현황</h1>
             <div class="two-content">
               <div class="map">
+                <button
+                  type="button"
+                  data-city="map_city1"
+                  data-city^="map_city"
+                >
+                  <span class="name">서울</span>
+                  <span class="num">43,627</span>
+                  <span class="before">(+194)</span>
+                </button>
+                <button
+                  type="button"
+                  data-city="map_city2"
+                  data-city^="map_city"
+                >
+                  <span class="name">부산</span>
+                  <span class="num">5,638</span>
+                  <span class="before">(+14)</span>
+                </button>
                 <svg
                   style="overflow: visible"
                   viewBox="0 0 637 950"
@@ -475,6 +493,49 @@
 
       <script th:src="@{/js/main.js}" src="../static/js/main.js"></script>
     </body>
-    <footer>DF</footer>
+    <footer>
+      <div class="ft1">
+        <p>개발자 : 김준엽 신치용 박지현</p>
+        <img src="../../resources/static/images/logo.jpg" width="50%" />
+      </div>
+      <div class="ft2">
+        <p>
+          민간이 취합한 집계이므로 공식적인 근거 자료로 활용될 수 없고, <br />본
+          사이트에서 제공하는 정보를 사용하고 공유함으로 인해서 <br />발생된
+          문제의 책임은 전적으로 사용자에게 있습니다.
+        </p>
+        <p id="copyright">copyrightⓒ All rights reserved by WIWY</p>
+      </div>
+      <div class="ft3">
+        <p>공유하기</p>
+        <div class="copylink">
+          <a
+            type="copylink"
+            href="javascript:;"
+            onclick="copyLink('yourlink.com');"
+            ><img
+              src="../../resources/static/images/copylink.png"
+              width="80%"
+              height="80%"
+          /></a>
+        </div>
+        <div class="instagram">
+          <a type="instagram" href="https://www.instagram.com/156.8_cm"
+            ><img
+              src="../../resources/static/images/instagram.png"
+              width="80%"
+              height="80%"
+          /></a>
+        </div>
+        <div class="kakaotalk">
+          <a type="kakaotalk" href="https://open.kakao.com/o/sSAc6aVc"
+            ><img
+              src="../../resources/static/images/kakaotalk.png"
+              width="80%"
+              height="80%"
+          /></a>
+        </div>
+      </div>
+    </footer>
   </html>
 </html>
