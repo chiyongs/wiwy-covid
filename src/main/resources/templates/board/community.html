@@ -92,9 +92,9 @@
                 <h2>게시판</h2>
               </header>
               <div class="posts">
-                <article>
+                <article th:each="board : ${boards}">
                   <div class="board">
-                    <h3>자유게시판</h3>
+                    <h3 th:text="${board.boardName}">자유게시판</h3>
                     <a class="list" href="#">
                       <time>방금</time>
                       <p>가나다</p>

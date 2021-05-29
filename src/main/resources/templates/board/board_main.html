@@ -58,7 +58,7 @@
             <!-- Content -->
             <section>
               <header class="main">
-                <h1><strong>자유게시판</strong></h1>
+                <h1 th:text="${board.boardName}"><strong>자유게시판</strong></h1>
               </header>
 
               <p>
@@ -76,185 +76,26 @@
                 </li>
               </ul>
               <div class="article-container">
-                <article class="article-board">
+                <article th:each="post : ${posts}" class="article-board">
                   <a
                     class="article-box"
+                    th:href="@{/{boardId}/view/{postId}(boardId=${board.id},postId=${post.id})}"
                     href="../post/post_main.html"
                     style="text-decoration: none !important"
                   >
                     <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
+                      <strong th:text="${post.postName}">가나다라마바사</strong>
                     </h2>
-                    <p class="article-text">아자차카타파하</p>
+                    <p th:text="${post.content}" class="article-text">아자차카타파하</p>
                     <time class="article-text">방금</time>
                     <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
+                      <li th:text="${post.likes}" title="공감" class="vote">👍🏻 0</li>
+                      <li th:text="${#lists.size(post.comments)}"title="댓글" class="comment">💬 0</li>
                     </ul></a
                   >
                 </article>
 
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
 
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
-
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
-
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
-
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
-
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
-
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
-
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
-
-                <article class="article-board">
-                  <a
-                    class="article-box"
-                    href="#"
-                    style="text-decoration: none !important"
-                  >
-                    <h2 class="article-title">
-                      <strong>가나다라마바사</strong>
-                    </h2>
-                    <p class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
-                    <ul class="article-status">
-                      <li title="공감" class="vote">👍🏻 0</li>
-                      <li title="댓글" class="comment">💬 0</li>
-                    </ul></a
-                  >
-                </article>
               </div>
 
               <ul class="pagination">
