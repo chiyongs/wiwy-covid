@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -62,6 +64,7 @@ public class Post {
 
     public static Post makePost(Board board, String postName, String content) {
         Post post = new Post();
+        post.setCreateTime(LocalDateTime.now());
         post.setBoard(board);
         post.setPostName(postName);
         post.setContent(content);
@@ -69,6 +72,58 @@ public class Post {
         return post;
     }
 
+    private static class TIME_MAXIMUM {
+
+        public static final int SEC = 60;
+        public static final int MIN = 60;
+        public static final int HOUR = 24;
+        public static final int DAY = 30;
+        public static final int MONTH = 12;
+    }
+
+    public String calculateTime(LocalDateTime paramDate) {
+
+        Date date = Date.from(paramDate.atZone(ZoneId.systemDefault()).toInstant());
+        long curTime = System.currentTimeMillis();
+        long regTime = date.getTime();
+        long diffTime = (curTime - regTime) / 1000;
+
+        String msg = null;
+
+        if (diffTime < TIME_MAXIMUM.SEC)
+        {
+            // sec
+            msg = diffTime + "초전";
+        }
+        else if ((diffTime /= TIME_MAXIMUM.SEC) < TIME_MAXIMUM.MIN)
+        {
+            // min
+            System.out.println(diffTime);
+
+            msg = diffTime + "분전";
+        }
+        else if ((diffTime /= TIME_MAXIMUM.MIN) < TIME_MAXIMUM.HOUR)
+        {
+            // hour
+            msg = (diffTime ) + "시간전";
+        }
+        else if ((diffTime /= TIME_MAXIMUM.HOUR) < TIME_MAXIMUM.DAY)
+        {
+            // day
+            msg = (diffTime ) + "일전";
+        }
+        else if ((diffTime /= TIME_MAXIMUM.DAY) < TIME_MAXIMUM.MONTH)
+        {
+            // day
+            msg = (diffTime ) + "달전";
+        }
+        else
+        {
+            msg = (diffTime) + "년전";
+        }
+
+        return msg;
+    }
 
 
 }

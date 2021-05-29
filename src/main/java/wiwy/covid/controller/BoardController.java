@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import wiwy.covid.domain.Board;
 import wiwy.covid.domain.Member;
 import wiwy.covid.domain.Post;
+import wiwy.covid.domain.PostDTO;
 import wiwy.covid.paging.BoardPaging;
 import wiwy.covid.paging.Paging;
 import wiwy.covid.service.BoardService;
@@ -16,6 +17,7 @@ import wiwy.covid.service.MemberService;
 import wiwy.covid.service.PostService;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,8 +43,18 @@ public class BoardController {
     public String viewOneBoard(@PathVariable Long boardId, Model model) {
         Board board = boardService.findOne(boardId);
         List<Post> posts = postService.pagingPosts(boardId, 0, 10);
+
+        List<PostDTO> postDTOS = new ArrayList<>();
+        List<String> postTimes = new ArrayList<>();
+        for (Post post : posts) {
+            PostDTO postDTO = new PostDTO();
+            postDTO.setPost(post);
+            postDTO.setPostTime(post.calculateTime(post.getCreateTime()));
+            postDTOS.add(postDTO);
+        }
         model.addAttribute("board",board);
-        model.addAttribute("posts", posts);
+        model.addAttribute("postDTOS", postDTOS);
+
 
         return "board/board_main";
     }
@@ -50,6 +62,7 @@ public class BoardController {
     // 게시판 페이징
     @GetMapping("/{boardId}/page/{pageNum}")
     public String viewOnePage(@PathVariable Long boardId, @PathVariable int pageNum, Model model) {
+        Board board = boardService.findOne(boardId);
         List<Post> posts = postService.findPostsByBoardId(boardId);
         Integer totalCount = posts.size();
 
@@ -61,8 +74,16 @@ public class BoardController {
         bp.setTotalCount(totalCount);
 
         List<Post> returnPosts = postService.pagingPosts(boardId, bp.getPaging().getPageStart(), 10);
-        model.addAttribute("paging", paging);
+
+        List<String> postTimes = new ArrayList<>();
+        for (Post post : posts) {
+            postTimes.add(post.calculateTime(post.getCreateTime()));
+        }
+
+        model.addAttribute("board", board);
+        model.addAttribute("bp", bp);
         model.addAttribute("posts", returnPosts);
+        model.addAttribute("postTimes",postTimes);
 
         return "/board/main";
     }

@@ -76,21 +76,21 @@
                 </li>
               </ul>
               <div class="article-container">
-                <article th:each="post : ${posts}" class="article-board">
+                <article th:each="postDTO : ${postDTOS}" class="article-board">
                   <a
                     class="article-box"
-                    th:href="@{/{boardId}/view/{postId}(boardId=${board.id},postId=${post.id})}"
+                    th:href="@{/{boardId}/view/{postId}(boardId=${board.id},postId=${postDTO.post.id})}"
                     href="../post/post_main.html"
                     style="text-decoration: none !important"
                   >
                     <h2 class="article-title">
-                      <strong th:text="${post.postName}">가나다라마바사</strong>
+                      <strong th:text="${postDTO.post.postName}">가나다라마바사</strong>
                     </h2>
-                    <p th:text="${post.content}" class="article-text">아자차카타파하</p>
-                    <time class="article-text">방금</time>
+                    <p th:text="${postDTO.post.content}" class="article-text">아자차카타파하</p>
+                    <time th:text="${postDTO.postTime}" class="article-text">방금</time>
                     <ul class="article-status">
-                      <li th:text="${post.likes}" title="공감" class="vote">👍🏻 0</li>
-                      <li th:text="${#lists.size(post.comments)}"title="댓글" class="comment">💬 0</li>
+                      <li th:text="${postDTO.post.likes}" title="공감" class="vote">👍🏻 0</li>
+                      <li th:text="${#lists.size(postDTO.post.comments)}"title="댓글" class="comment">💬 0</li>
                     </ul></a
                   >
                 </article>
