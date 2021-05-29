@@ -487,55 +487,55 @@ footer {
   stroke-width: 2;
 }
 #CD11 {
-  fill: #f1c40f;
+  fill: #0f44f1;
 }
 #CD26 {
-  fill: #16a085;
+  fill: #1a73bc;
 }
 #CD27 {
-  fill: #f39c12;
+  fill: #1a73bc;
 }
 #CD28 {
-  fill: #2ecc71;
+  fill: #1a73bc;
 }
 #CD29 {
-  fill: #e67e22;
+  fill: #1a73bc;
 }
 #CD30 {
-  fill: #27ae60;
+  fill: #1a73bc;
 }
 #CD31 {
-  fill: #d35400;
+  fill: #1a73bc;
 }
 #CD36 {
-  fill: #3498db;
+  fill: #1a73bc;
 }
 #CD41 {
-  fill: #e74c3c;
+  fill: #0f44f1;
 }
 #CD42 {
-  fill: #2980b9;
+  fill: #1a73bc;
 }
 #CD43 {
-  fill: #c0392b;
+  fill: #1a73bc;
 }
 #CD44 {
-  fill: #9b59b6;
+  fill: #1a73bc;
 }
 #CD45 {
-  fill: #8e44ad;
+  fill: #1a73bc;
 }
 #CD46 {
-  fill: #34495e;
+  fill: #1a73bc;
 }
 #CD47 {
-  fill: #2c3e50;
+  fill: #1a73bc;
 }
 #CD48 {
-  fill: #1abc9c;
+  fill: #1a73bc;
 }
 #CD50 {
-  fill: #f1c40f;
+  fill: #0f44f1;
 }
 .TEXT {
   fill: #ffffff;
@@ -1009,8 +1009,8 @@ footer {
   top: 4150px;
 } /*서울*/
 .map button[data-city="map_city2"] {
-  left: 584px;
-  top: 398px;
+  left: 684px;
+  top: 4750px;
 } /*부산*/
 .map button[data-city="map_city3"] {
   left: 270px;
