@@ -11,6 +11,8 @@ import wiwy.covid.apicall.CoronaRepository;
 import wiwy.covid.apicall.abroadcoronadto.AbrCoronaDto;
 import wiwy.covid.apicall.coronadto.CoronaDto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,11 +29,17 @@ public class CoronaController {
     public String showCovid(Model model) {
         List<CoronaDto> hapGae = coronaRepository.findHapGae();
         CoronaDto coronaToday = hapGae.get(0);
-        List<AbrCoronaDto> abroads = abrCoronaRepository.findAbrCoronaPerDay();
 
-        // seq를 기준으로 오름차순 정렬
-        AbrCoronaComparator comp = new AbrCoronaComparator();
-        Collections.sort(abroads, comp);
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy년 MM월 d일");
+        String curDate = date.format(df);
+        curDate = curDate + " 00시";
+
+        List<AbrCoronaDto> abroads = abrCoronaRepository.findByDate(curDate);
+
+//        // seq를 기준으로 오름차순 정렬
+//        AbrCoronaComparator comp = new AbrCoronaComparator();
+//        Collections.sort(abroads, comp);
 
         model.addAttribute("coronaToday", coronaToday);
         model.addAttribute("abroads", abroads);

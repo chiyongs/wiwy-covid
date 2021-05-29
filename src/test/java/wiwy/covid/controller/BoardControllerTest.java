@@ -39,9 +39,9 @@ class BoardControllerTest {
         member.setUserName("shin");
         memberService.join(member);
 
-        for(int i=0;i<100;i++) {
-            Long post = postService.post(member.getId(), board.getId(), "hi" + i, "bye" + i);
-        }
+//        for(int i=0;i<100;i++) {
+//            Long post = postService.post(member.getId(), board.getId(), "hi" + i, "bye" + i);
+//        }
 
     }
 

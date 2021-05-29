@@ -38,5 +38,11 @@ public class AbrCoronaRepository {
                 .getResultList();
     }
 
+    public List<AbrCoronaDto> findByDate(String curDate) {
+        return em.createQuery("select a from AbrCoronaDto a where a.stdDay = :curDate order by a.natDefCnt desc")
+                .setParameter("curDate", curDate)
+                .getResultList();
+    }
+
 
 }

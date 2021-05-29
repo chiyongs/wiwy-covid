@@ -227,7 +227,7 @@ public class ApiExplorer {
 
         AbrResponse abrResponse= xmlMapper.readValue(sb.toString(), AbrResponse.class);
 
-        if(abrResponse.getBody().getTotalCount() != 0 && abrResponse.getHeader().getResultCode() == "00") {
+        if(abrResponse.getBody().getTotalCount() != 0 && abrResponse.getHeader().getResultCode() == 0) {
             if(abrResponse.getBody().getItems() != null) {
                 List<AbrCoronaDto> items = abrResponse.getBody().getItems();
                 System.out.println(items.toString());

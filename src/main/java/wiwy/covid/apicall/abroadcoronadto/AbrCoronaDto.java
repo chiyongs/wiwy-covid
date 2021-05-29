@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,7 +20,7 @@ public class AbrCoronaDto {
     private String areaNm;
     private String areaNmCn;
     private String areaNmEn;
-    private LocalDateTime createDt;
+    private String createDt;
     private int natDeathCnt;
     private String natDeathRate;
     private int natDefCnt;

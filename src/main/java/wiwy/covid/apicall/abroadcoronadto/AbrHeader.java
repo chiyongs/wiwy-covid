@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class AbrHeader {
-    private String resultCode;
+    private int resultCode;
     private String resultMsg;
 }
