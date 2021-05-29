@@ -99,6 +99,7 @@
                       th:each="postDTO : ${boardDTO.postDTOS}"
                       class="list"
                       href="#"
+                      th:href="@{/{boardId}/view/{postId}(boardId=${boardDTO.board.id},postId=${postDTO.post.id})}"
                     >
                       <time th:text="${postDTO.postTime}">방금</time>
                       <p th:text="${postDTO.post.postName}">가나다</p>
