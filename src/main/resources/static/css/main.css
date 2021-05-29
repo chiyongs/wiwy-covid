@@ -282,7 +282,7 @@ a {
   height: 100%;
 }
 .cityCovidStatus {
-  background-color: rgb(77, 3, 77);
+  background-color: rgb(255, 248, 255);
   width: 90vw;
   height: 90vw;
 }
@@ -433,9 +433,10 @@ footer {
     font-size: 1.5vw;
   }
   .cityCovidStatus {
-    background-color: rgb(65, 3, 65);
-    width: 40vw;
-    height: 40vw;
+    background-color: rgb(252, 252, 252);
+    width: 35vw;
+    height: 35vw;
+    padding: 2vw;
   }
   .tabel {
     left: 50%;

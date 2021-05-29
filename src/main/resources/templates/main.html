@@ -314,7 +314,84 @@
               </div>
 
               <div class="cityCovidStatus">
-                <canvas id="cityCovidChart"></canvas>
+                <canvas
+                  id="cityCovidChart"
+                  style="
+                    line-height: 1.2;
+                    word-wrap: break-word;
+                    font-family: Noto Sans KR, sans-serif;
+                    font-size: 24px;
+                    -webkit-font-smoothing: antialiased;
+                    color: rgb(29, 29, 31);
+                    letter-spacing: -0.05em;
+                    aspect-ratio: auto 367 / 183;
+                    margin: 0;
+                    margin-top: 6vw;
+                    padding: 20px;
+                    border: 0;
+                    display: block;
+                    box-sizing: border-box;
+                    height: 183px;
+                    width: 367px;
+                  "
+                ></canvas>
+                <script>
+                  const country = [
+                    "서울",
+                    "경기",
+                    "대구",
+                    "인천",
+                    "부산",
+                    "경남",
+                    "경북",
+                  ];
+                  const countrydata = {
+                    labels: country,
+                    datasets: [
+                      {
+                        label: "코로나 확진자 현황",
+                        backgroundColor: [
+                          "#0074D9",
+                          "#FF4136",
+                          "#2ECC40",
+                          "#FF851B",
+                          "#7FDBFF",
+                          "#B10DC9",
+                          "#FFDC00",
+                        ],
+                        borderColor: "rgba(255, 225, 225, 0.2)",
+                        data: [43627, 38792, 9865, 6168, 5638, 4673, 4665],
+                      },
+                    ],
+                  };
+                  const countryconfig = {
+                    type: "pie",
+                    data: countrydata,
+                    options: {
+                      responsive: true,
+                      pieceLabel: {
+                        render: "label",
+                        arc: true,
+                        fontColor: "white",
+                        position: "outside",
+                      },
+                      plugins: {
+                        legend: {
+                          position: "top",
+                        },
+                        title: {
+                          display: true,
+                          text: "시도별 확진자 현황",
+                        },
+                      },
+                    },
+                  };
+
+                  var myChart = new Chart(
+                    document.getElementById("cityCovidChart"),
+                    countryconfig
+                  );
+                </script>
               </div>
             </div>
           </section>
