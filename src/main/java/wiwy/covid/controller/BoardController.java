@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import wiwy.covid.domain.Board;
-import wiwy.covid.domain.Member;
-import wiwy.covid.domain.Post;
-import wiwy.covid.domain.PostDTO;
+import wiwy.covid.domain.*;
 import wiwy.covid.paging.BoardPaging;
 import wiwy.covid.paging.Paging;
 import wiwy.covid.service.BoardService;
@@ -33,7 +30,22 @@ public class BoardController {
     public String viewAllBoards(Model model) {
 
         List<Board> boards = boardService.findAllBoards();
-        model.addAttribute("boards", boards);
+        List<BoardDTO> boardDTOS = new ArrayList<>();
+        for (Board board : boards) {
+            List<PostDTO> postDTOS = new ArrayList<>();
+            BoardDTO boardDTO = new BoardDTO();
+            List<Post> posts = postService.pagingPosts(board.getId(), 0, 5);
+            for (Post post : posts) {
+                PostDTO postDTO = new PostDTO();
+                postDTO.setPost(post);
+                postDTO.setPostTime(post.calculateTime(post.getCreateTime()));
+                postDTOS.add(postDTO);
+            }
+            boardDTO.setBoard(board);
+            boardDTO.setPostDTOS(postDTOS);
+            boardDTOS.add(boardDTO);
+        }
+        model.addAttribute("boardDTOS", boardDTOS);
 
         return "board/community";
     }

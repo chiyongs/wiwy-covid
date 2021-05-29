@@ -92,28 +92,12 @@
                 <h2>게시판</h2>
               </header>
               <div class="posts">
-                <article th:each="board : ${boards}">
+                <article th:each="boardDTO : ${boardDTOS}">
                   <div class="board">
-                    <h3 th:text="${board.boardName}">자유게시판</h3>
-                    <a class="list" href="#">
-                      <time>방금</time>
-                      <p>가나다</p>
-                    </a>
-                    <a class="list" href="#">
-                      <time>방금</time>
-                      <p>라마바</p>
-                    </a>
-                    <a class="list" href="#">
-                      <time>방금</time>
-                      <p>사아자</p>
-                    </a>
-                    <a class="list" href="#">
-                      <time>방금</time>
-                      <p>사아자</p>
-                    </a>
-                    <a class="list" href="#">
-                      <time>방금</time>
-                      <p>사아자</p>
+                    <h3 th:text="${boardDTO.board.boardName}">자유게시판</h3>
+                    <a th:each="postDTO : ${boardDTO.postDTOS}" class="list" href="#">
+                      <time th:text="${postDTO.postTime}">방금</time>
+                      <p th:text="${postDTO.post.postName}">가나다</p>
                     </a>
                   </div>
                   <ul class="actions" id="actions-more">
