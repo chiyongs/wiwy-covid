@@ -26,7 +26,7 @@ a {
 .normal-content {
   padding-left: 5vw;
   padding-right: 5vw;
-  background-color: thistle;
+  background-color: rgb(255, 255, 255);
   height: auto;
 }
 
@@ -219,7 +219,14 @@ a {
   margin: 10px 10px 10px 10px;
   text-align: center;
 }
-
+.data2 div {
+  border-radius: 10px;
+  width: 80vw;
+  height: 30vw;
+  min-width: 80vw;
+  margin: 20px 20px 20px 20px;
+  text-align: center;
+}
 .coronaboard p {
   font-size: 1.2rem;
   font-weight: bold;
@@ -237,11 +244,23 @@ a {
   width: 90vw;
   height: 50vw;
 }
+.vaccineCovidStatus {
+  background-color: rgb(255, 255, 255);
+  width: 90vw;
+  height: 50vw;
+}
 #onebox {
   background-color: rgb(49, 49, 168);
   justify-content: center;
 }
+#onebox2 {
+  background-color: rgb(123, 123, 214);
+  justify-content: center;
+}
 #onebox p {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#onebox2 p {
   background-color: rgba(0, 0, 0, 0.4);
 }
 #datenum {
@@ -254,7 +273,13 @@ a {
 #twobox {
   background-color: rgb(138, 58, 126);
 }
+#twobox2 {
+  background-color: rgb(243, 172, 232);
+}
 #twobox p {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#twobox2 p {
   background-color: rgba(0, 0, 0, 0.4);
 }
 #threebox {
@@ -275,7 +300,7 @@ a {
   margin-top: 10vw;
   margin-bottom: 20vw;
   padding-bottom: 10vw;
-  background: #1ec6f0;
+  background: #ffffff;
 }
 .map svg {
   width: 100%;
@@ -359,12 +384,15 @@ footer {
   .normal-content {
     padding-left: 10vw;
     padding-right: 10vw;
-    background-color: rgb(196, 51, 196);
+    background-color: rgb(255, 255, 255);
   }
 
   .content-section {
     padding-left: 5vw;
     padding-right: 5vw;
+  }
+  #content-section-5 {
+    margin-bottom: 20vw;
   }
   .two-content {
     display: flex;
@@ -383,6 +411,14 @@ footer {
     height: 15vw;
     min-width: 15vw;
     margin: 10px 10px 10px 10px;
+    text-align: center;
+  }
+  .data2 div {
+    border-radius: 10px;
+    width: 20vw;
+    height: 10vw;
+    min-width: 30vw;
+    margin: 20px 20px 20px 20px;
     text-align: center;
   }
   .coronaboard {
@@ -406,17 +442,24 @@ footer {
     width: 40vw;
     height: 30vw;
   }
+  .vaccineCovidStatus {
+    background-color: rgb(255, 255, 255);
+    width: 40vw;
+    height: 30vw;
+  }
   .map {
     width: 40vw;
     height: 50vw;
     margin: 0;
     padding: 0;
-    background: #1ec6f0;
+    background: #ffffff;
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
   }
   .map svg {
+    display: block;
     width: 80%;
     height: 93%;
   }
@@ -487,55 +530,55 @@ footer {
   stroke-width: 2;
 }
 #CD11 {
-  fill: #f1c40f;
+  fill: #0f44f1;
 }
 #CD26 {
-  fill: #16a085;
+  fill: #1a73bc;
 }
 #CD27 {
-  fill: #f39c12;
+  fill: #1a73bc;
 }
 #CD28 {
-  fill: #2ecc71;
+  fill: #1a73bc;
 }
 #CD29 {
-  fill: #e67e22;
+  fill: #1a73bc;
 }
 #CD30 {
-  fill: #27ae60;
+  fill: #1a73bc;
 }
 #CD31 {
-  fill: #d35400;
+  fill: #1a73bc;
 }
 #CD36 {
-  fill: #3498db;
+  fill: #1a73bc;
 }
 #CD41 {
-  fill: #e74c3c;
+  fill: #0f44f1;
 }
 #CD42 {
-  fill: #2980b9;
+  fill: #1a73bc;
 }
 #CD43 {
-  fill: #c0392b;
+  fill: #1a73bc;
 }
 #CD44 {
-  fill: #9b59b6;
+  fill: #1a73bc;
 }
 #CD45 {
-  fill: #8e44ad;
+  fill: #1a73bc;
 }
 #CD46 {
-  fill: #34495e;
+  fill: #1a73bc;
 }
 #CD47 {
-  fill: #2c3e50;
+  fill: #1a73bc;
 }
 #CD48 {
-  fill: #1abc9c;
+  fill: #1a73bc;
 }
 #CD50 {
-  fill: #f1c40f;
+  fill: #0f44f1;
 }
 .TEXT {
   fill: #ffffff;
@@ -626,8 +669,12 @@ footer {
   position: absolute;
   top: 50%;
   width: 7em;
+  background-color: #f5f5f5;
 }
-
+.icon-image {
+  position: relative;
+  z-index: 20;
+}
 .features article .content {
   -moz-flex-grow: 1;
   -webkit-flex-grow: 1;
@@ -1005,16 +1052,16 @@ footer {
   color: #fbfbfb;
 }
 .map button[data-city="map_city1"] {
-  left: 464px;
-  top: 4150px;
+  left: 164px;
+  top: 200px;
 } /*서울*/
 .map button[data-city="map_city2"] {
-  left: 584px;
-  top: 398px;
+  left: 504px;
+  top: 655px;
 } /*부산*/
 .map button[data-city="map_city3"] {
-  left: 270px;
-  top: 260px;
+  left: 400px;
+  top: 550px;
 } /*대구*/
 .map button[data-city="map_city4"] {
   left: 38px;
@@ -1076,3 +1123,6 @@ footer {
   left: 302px;
   top: 464px;
 } /*검역*/
+#content-section-5 {
+  margin-bottom: 13vw;
+}

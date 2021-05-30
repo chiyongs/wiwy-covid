@@ -159,6 +159,9 @@
             <h1>시도별 확진자 현황</h1>
             <div class="two-content">
               <div class="map">
+                <img src="../../resources/static/images/map.png" width="100%" />
+              </div>
+              <!-- <div class="map">
                 <button
                   type="button"
                   data-city="map_city1"
@@ -176,6 +179,15 @@
                   <span class="name">부산</span>
                   <span class="num">5,638</span>
                   <span class="before">(+14)</span>
+                </button>
+                <button
+                  type="button"
+                  data-city="map_city3"
+                  data-city^="map_city"
+                >
+                  <span class="name">대구</span>
+                  <span class="num">9,895</span>
+                  <span class="before">(+4)</span>
                 </button>
                 <svg
                   style="overflow: visible"
@@ -329,7 +341,7 @@
                     </text>
                   </g>
                 </svg>
-              </div>
+              </div> -->
 
               <div class="cityCovidStatus">
                 <canvas
@@ -426,7 +438,6 @@
               </thead>
               <tbody class="tbody">
                 <tr class="tabel-tr" th:each="abroad : ${abroads}">
-                  <!--                  <td th:text="${abroadStat.count}"></td>-->
                   <td class="th-1" th:text="${abroad.nationNm}"></td>
                   <td class="th-2" th:text="${abroad.natDefCnt}"></td>
                   <td class="th-3" th:text="${abroad.natDeathCnt}"></td>
@@ -435,54 +446,157 @@
             </table>
           </section>
 
-          <section class="content-section" id="content-section-4"></section>
+          <section class="content-section" id="content-section-4">
+            <h1>백신 접종 현황</h1>
+            <div class="two-content">
+              <div class="coronaboard">
+                <div class="data2">
+                  <div id="onebox2">
+                    <p align="center">1차 접종</p>
+                    <span th:text="${coronaToday.defCnt}"></span>
+                    <span id="datenum" th:text="|+${coronaToday.incDec}|"
+                      >+
+                    </span>
+                  </div>
+                </div>
+                <div class="data2">
+                  <div id="twobox2">
+                    <p align="center">접종 완료</p>
+                    <span th:text="${coronaToday.isolIngCnt}"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="vaccineCovidStatus">
+                <canvas
+                  id="vaccineCovidChart"
+                  style="
+                    line-height: 1.2;
+                    word-wrap: break-word;
+                    font-family: Noto Sans KR, sans-serif;
+                    font-size: 14px;
+                    -webkit-font-smoothing: antialiased;
+                    color: rgb(29, 29, 31);
+                    letter-spacing: -0.05em;
+                    aspect-ratio: auto 367 / 183;
+                    margin: 0;
+                    margin-top: 3vw;
+                    padding: 20px;
+                    border: 0;
+                    display: block;
+                    box-sizing: border-box;
+                    height: 183px;
+                    width: 367px;
+                  "
+                ></canvas>
+                <script>
+                  const vaccinelabels = [
+                    "5월 23일",
+                    "5월 24일",
+                    "5월 25일",
+                    "5월 26일",
+                    "5월 27일",
+                    "5월 28일",
+                    "5월 29일",
+                  ];
+                  const vaccinedata = {
+                    labels: vaccinelabels,
+                    datasets: [
+                      {
+                        label: "백신 접종자 현황",
+                        backgroundColor: "rgb(25, 99, 102)",
+                        borderColor: "rgb(255, 99, 132)",
+                        data: [
+                          2926, 173169, 169070, 87165, 657192, 542227, 171989,
+                        ],
+                      },
+                    ],
+                  };
+                  const vaccineconfig = {
+                    type: "bar",
+                    data: vaccinedata,
+                    options: {},
+                  };
+
+                  var myChart = new Chart(
+                    document.getElementById("vaccineCovidChart"),
+                    vaccineconfig
+                  );
+                </script>
+              </div>
+            </div>
+          </section>
 
           <section class="content-section" id="content-section-5">
             <header class="major">
-              <h2>Erat lacinia</h2>
+              <h2>Service</h2>
             </header>
             <div class="features">
               <article>
-                <span class="icon fa-diamond"></span>
+                <span class="icon fa-diamond"
+                  ><img
+                    src="../../resources/static/images/icon1.png"
+                    class="icon-image"
+                    width="46%"
+                    style="margin-top: 33px; margin-left: 5px"
+                /></span>
                 <div class="content">
-                  <h3>Portitor ullamcorper</h3>
+                  <h3>코로나 확진자 정보</h3>
                   <p>
-                    Aenean ornare velit lacus, ac varius enim lorem ullamcorper
-                    dolore. Proin aliquam facilisis ante interdum. Sed nulla
-                    amet lorem feugiat tempus aliquam.
+                    저희 서비스는 일일 코로나 확진자 정보뿐만 아니라, 시도별
+                    확진자 정보, 국외 확진자 정보를 모두 숫자와 차트를 이용해
+                    사용자들이 보기 쉽도록 정보를 제공합니다.
                   </p>
                 </div>
               </article>
               <article>
-                <span class="icon fa-paper-plane"></span>
+                <span class="icon fa-paper-plane"
+                  ><img
+                    src="../../resources/static/images/icon2.png"
+                    class="icon-image"
+                    width="46%"
+                    style="margin-top: 33px; margin-left: 5px"
+                /></span>
                 <div class="content">
-                  <h3>Sapien veroeros</h3>
+                  <h3>코로나 백신 정보</h3>
                   <p>
-                    Aenean ornare velit lacus, ac varius enim lorem ullamcorper
-                    dolore. Proin aliquam facilisis ante interdum. Sed nulla
-                    amet lorem feugiat tempus aliquam.
+                    현재 백신 접종자 213만명. 백신을 어디서 맞아야하는지 그리고
+                    누가 맞을 수 있는지 궁금하신 사용자들을 위해 저희 서비스는
+                    코로나 백신에 대한 정보를 한번에 제공합니다.
                   </p>
                 </div>
               </article>
               <article>
-                <span class="icon fa-rocket"></span>
+                <span class="icon fa-rocket"
+                  ><img
+                    src="../../resources/static/images/icon3.png"
+                    class="icon-image"
+                    width="46%"
+                    style="margin-top: 33px; margin-left: 5px"
+                /></span>
                 <div class="content">
-                  <h3>Quam lorem ipsum</h3>
+                  <h3>커뮤니티 서비스 제공</h3>
                   <p>
-                    Aenean ornare velit lacus, ac varius enim lorem ullamcorper
-                    dolore. Proin aliquam facilisis ante interdum. Sed nulla
-                    amet lorem feugiat tempus aliquam.
+                    저희 서비스는 단방향성으로 정보를 제공하는 것이 아니라
+                    사용자들간의 소통이 원활할 수 있도록 사용자 커뮤니티
+                    서비스를 제공합니다.
                   </p>
                 </div>
               </article>
               <article>
-                <span class="icon fa-signal"></span>
+                <span class="icon fa-signal"
+                  ><img
+                    src="../../resources/static/images/icon4.png"
+                    class="icon-image"
+                    width="46%"
+                    style="margin-top: 33px; margin-left: 5px"
+                /></span>
                 <div class="content">
-                  <h3>Sed magna finibus</h3>
+                  <h3>실시간 정보 반영</h3>
                   <p>
-                    Aenean ornare velit lacus, ac varius enim lorem ullamcorper
-                    dolore. Proin aliquam facilisis ante interdum. Sed nulla
-                    amet lorem feugiat tempus aliquam.
+                    저희 서비스는 질병관리본부의 정보를 바탕으로 하루에 2번,
+                    실시간으로 모든 정보를 업데이트 하여서 사용자들에게 새로운
+                    정보를 제공합니다.
                   </p>
                 </div>
               </article>
