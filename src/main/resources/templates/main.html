@@ -79,24 +79,24 @@
                 <div class="data">
                   <div id="onebox">
                     <p align="center">확진환자</p>
-                    <span th:text="${coronaToday.defCnt}"></span>
+                    <span class="coronaNum" th:text="${coronaToday.defCnt}">123</span>
                     <span id="datenum" th:text="|+${coronaToday.incDec}|"
                       >+
                     </span>
                   </div>
                   <div id="twobox">
                     <p align="center">격리해제</p>
-                    <span th:text="${coronaToday.isolClearCnt}"></span>
+                    <span class="coronaNum" th:text="${coronaToday.isolClearCnt}"></span>
                   </div>
                 </div>
                 <div class="data">
                   <div id="threebox">
                     <p align="center">격리중</p>
-                    <span th:text="${coronaToday.isolIngCnt}"></span>
+                    <span class="coronaNum" th:text="${coronaToday.isolIngCnt}"></span>
                   </div>
                   <div id="fourbox">
                     <p align="center">사망</p>
-                    <span th:text="${coronaToday.deathCnt}"></span>
+                    <span class="coronaNum" th:text="${coronaToday.deathCnt}"></span>
                   </div>
                 </div>
               </div>

@@ -263,6 +263,13 @@ a {
 #onebox2 p {
   background-color: rgba(0, 0, 0, 0.4);
 }
+#abce {
+    color: red;
+      font-size: 30px;
+      display: block;
+      font-weight: bold;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 #datenum {
   color: red;
   font-size: 30px;
@@ -1125,4 +1132,8 @@ footer {
 } /*검역*/
 #content-section-5 {
   margin-bottom: 13vw;
+}
+.coronaNum {
+margin-top: 40px;
+display: block;
 }
