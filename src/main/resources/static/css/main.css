@@ -26,7 +26,7 @@ a {
 .normal-content {
   padding-left: 5vw;
   padding-right: 5vw;
-  background-color: thistle;
+  background-color: rgb(255, 255, 255);
   height: auto;
 }
 
@@ -219,7 +219,14 @@ a {
   margin: 10px 10px 10px 10px;
   text-align: center;
 }
-
+.data2 div {
+  border-radius: 10px;
+  width: 80vw;
+  height: 30vw;
+  min-width: 80vw;
+  margin: 20px 20px 20px 20px;
+  text-align: center;
+}
 .coronaboard p {
   font-size: 1.2rem;
   font-weight: bold;
@@ -237,11 +244,23 @@ a {
   width: 90vw;
   height: 50vw;
 }
+.vaccineCovidStatus {
+  background-color: rgb(255, 255, 255);
+  width: 90vw;
+  height: 50vw;
+}
 #onebox {
   background-color: rgb(49, 49, 168);
   justify-content: center;
 }
+#onebox2 {
+  background-color: rgb(123, 123, 214);
+  justify-content: center;
+}
 #onebox p {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#onebox2 p {
   background-color: rgba(0, 0, 0, 0.4);
 }
 #datenum {
@@ -254,7 +273,13 @@ a {
 #twobox {
   background-color: rgb(138, 58, 126);
 }
+#twobox2 {
+  background-color: rgb(243, 172, 232);
+}
 #twobox p {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#twobox2 p {
   background-color: rgba(0, 0, 0, 0.4);
 }
 #threebox {
@@ -359,12 +384,15 @@ footer {
   .normal-content {
     padding-left: 10vw;
     padding-right: 10vw;
-    background-color: rgb(196, 51, 196);
+    background-color: rgb(255, 255, 255);
   }
 
   .content-section {
     padding-left: 5vw;
     padding-right: 5vw;
+  }
+  #content-section-5 {
+    margin-bottom: 16vw;
   }
   .two-content {
     display: flex;
@@ -385,6 +413,14 @@ footer {
     margin: 10px 10px 10px 10px;
     text-align: center;
   }
+  .data2 div {
+    border-radius: 10px;
+    width: 20vw;
+    height: 10vw;
+    min-width: 30vw;
+    margin: 20px 20px 20px 20px;
+    text-align: center;
+  }
   .coronaboard {
     background-color: rgb(255, 255, 255);
     margin-left: 3vw;
@@ -402,6 +438,11 @@ footer {
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   }
   .dailyCovidStatus {
+    background-color: rgb(255, 255, 255);
+    width: 40vw;
+    height: 30vw;
+  }
+  .vaccineCovidStatus {
     background-color: rgb(255, 255, 255);
     width: 40vw;
     height: 30vw;
@@ -1082,3 +1123,6 @@ footer {
   left: 302px;
   top: 464px;
 } /*검역*/
+#content-section-5 {
+  margin-bottom: 20vw;
+}
