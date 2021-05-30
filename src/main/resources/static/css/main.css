@@ -264,11 +264,11 @@ a {
   background-color: rgba(0, 0, 0, 0.4);
 }
 #abce {
-    color: red;
-      font-size: 30px;
-      display: block;
-      font-weight: bold;
-      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: red;
+  font-size: 30px;
+  display: block;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 #datenum {
   color: red;
@@ -444,6 +444,11 @@ footer {
     color: aliceblue;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   }
+  .coronaNum {
+    margin-top: 4vw !important;
+    display: block;
+  }
+
   .dailyCovidStatus {
     background-color: rgb(255, 255, 255);
     width: 40vw;
@@ -1134,6 +1139,6 @@ footer {
   margin-bottom: 13vw;
 }
 .coronaNum {
-margin-top: 40px;
-display: block;
+  margin-top: 10px;
+  display: block;
 }
