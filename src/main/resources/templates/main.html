@@ -119,16 +119,15 @@
                     width: 367px;
                   "
                 ></canvas>
-                <script>
-                  const labels = [
-                    "5월 23일",
-                    "5월 24일",
-                    "5월 25일",
-                    "5월 26일",
-                    "5월 27일",
-                    "5월 28일",
-                    "5월 29일",
-                  ];
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+                const labels = [[${confirmedDays}]];
+                const week = [[${confirmedCnts}]];
+
+
+    /*]]>*/
+
+
                   const data = {
                     labels: labels,
                     datasets: [
@@ -136,7 +135,7 @@
                         label: "코로나 확진자 현황",
                         backgroundColor: "rgb(255, 99, 132)",
                         borderColor: "rgb(255, 99, 132)",
-                        data: [585, 530, 516, 699, 637, 587, 533],
+                        data: week,
                       },
                     ],
                   };
@@ -365,7 +364,13 @@
                     width: 367px;
                   "
                 ></canvas>
-                <script>
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+
+                const confirmedPerCity = [[${cityCnts}]];
+
+
+    /*]]>*/
                   const country = [
                     "서울",
                     "경기",
@@ -381,16 +386,16 @@
                       {
                         label: "코로나 확진자 현황",
                         backgroundColor: [
-                          "#0074D9",
-                          "#FF4136",
-                          "#2ECC40",
-                          "#FF851B",
-                          "#7FDBFF",
-                          "#B10DC9",
-                          "#FFDC00",
+                          "#8979e2",
+                          "#ebceed",
+                          "#3be8e5",
+                          "#91c2f2",
+                          "#5cb6ff",
+                          "#977cde",
+                          "#d189c8",
                         ],
                         borderColor: "rgba(255, 225, 225, 0.2)",
-                        data: [43627, 38792, 9865, 6168, 5638, 4673, 4665],
+                        data: confirmedPerCity,
                       },
                     ],
                   };

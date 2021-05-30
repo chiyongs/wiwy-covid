@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import wiwy.covid.apicall.coronadto.CoronaDto;
+import wiwy.covid.apicall.coronadto.CoronaPerWeekDTO;
 
 
 import javax.persistence.EntityManager;
@@ -34,7 +35,7 @@ public class CoronaRepository {
     public List<CoronaDto> findCoronaPerDay() {
         return em.createQuery("select c from CoronaDto c order by c.seq desc",CoronaDto.class)
                 .setFirstResult(0)
-                .setMaxResults(19)
+                .setMaxResults(18)
                 .getResultList();
     }
 
@@ -42,6 +43,13 @@ public class CoronaRepository {
         return em.createQuery("select c from CoronaDto c order by c.seq desc", CoronaDto.class)
                 .setFirstResult(18)
                 .setMaxResults(1)
+                .getResultList();
+    }
+
+    public List<CoronaDto> findConfirmedPerWeek() {
+        return em.createQuery("select c from CoronaDto c where c.gubun = '합계' order by c.seq desc", CoronaDto.class)
+                .setFirstResult(0)
+                .setMaxResults(7)
                 .getResultList();
     }
 

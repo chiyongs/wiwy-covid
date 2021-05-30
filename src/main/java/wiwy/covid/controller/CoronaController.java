@@ -1,6 +1,7 @@
 package wiwy.covid.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,9 @@ import wiwy.covid.apicall.AbrCoronaRepository;
 import wiwy.covid.apicall.CoronaRepository;
 import wiwy.covid.apicall.abroadcoronadto.AbrCoronaDto;
 import wiwy.covid.apicall.coronadto.CoronaDto;
+import wiwy.covid.apicall.coronadto.CoronaPerWeekDTO;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -24,9 +27,37 @@ public class CoronaController {
 
     @GetMapping("/")
     public String showCovid(Model model) {
+
+        // 코로나 확진자 현황
         List<CoronaDto> hapGae = coronaRepository.findHapGae();
         CoronaDto coronaToday = hapGae.get(0);
 
+        // 날짜별 코로나 확진자 현황
+//        List<String> coronaDays = new ArrayList<>();
+        List<CoronaDto> confirmedPerWeek = coronaRepository.findConfirmedPerWeek();
+        List<Integer> confirmedCnts = new ArrayList<>();
+        List<String> confirmedDays = new ArrayList<>();
+        for (CoronaDto weekDTO : confirmedPerWeek) {
+            confirmedCnts.add(weekDTO.getIncDec());
+            confirmedDays.add(weekDTO.getStdDay());
+        }
+        confirmedDays.sort(Comparator.naturalOrder());
+        Collections.reverse(confirmedCnts);
+        model.addAttribute("confirmedCnts",confirmedCnts);
+        model.addAttribute("confirmedDays", confirmedDays);
+
+        // 시도별 코로나 확진자 현황
+        List<CoronaDto> cities = coronaRepository.findCoronaPerDay();
+        List<Integer> cityCnts = new ArrayList<>();
+        for (CoronaDto city : cities) {
+            cityCnts.add(city.getDefCnt());
+        }
+        cityCnts.sort(Comparator.reverseOrder());
+        model.addAttribute("cityCnts",cityCnts);
+
+
+
+        // 국외 확진자 현황
         List<AbrCoronaDto> recent = abrCoronaRepository.findRecent();
 
 
@@ -37,7 +68,7 @@ public class CoronaController {
 
         List<AbrCoronaDto> abroads = new ArrayList<>();
 
-        // 업데이트 된 경우
+        // 국외 코로나 업데이트 된 경우
         if(curDate == recent.get(0).getStdDay()) {
             abroads = abrCoronaRepository.findByDate(curDate);
         } else { // 새벽이어서 업데이트 안 된 경우
@@ -46,9 +77,6 @@ public class CoronaController {
             abroads = abrCoronaRepository.findByDate(curDate);
         }
 
-//        // seq를 기준으로 오름차순 정렬
-//        AbrCoronaComparator comp = new AbrCoronaComparator();
-//        Collections.sort(abroads, comp);
 
         model.addAttribute("coronaToday", coronaToday);
         model.addAttribute("abroads", abroads);
