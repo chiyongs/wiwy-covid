@@ -23,7 +23,7 @@ public class MemberController {
     private final MemberService memberService;
 
     // 회원 조회 매핑
-    @PreAuthorize("hasRole('ROLE_MEMBER')")
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/member/{memberId}")
     public String member(@PathVariable Long memberId, Model model) {
         Member findMember = memberService.findOne(memberId);
@@ -36,17 +36,16 @@ public class MemberController {
         return "member/signIn";
     }
 
-    @GetMapping("/addMember")
+
+    @GetMapping("/signup")
     public String getMemberForm() {
         return "member/signUp";
     }
 
-    @PostMapping("/addMember")
-    public String postMemberForm(Member member, RedirectAttributes redirectAttributes) {
-        Long memberId = memberService.join(member);
-        redirectAttributes.addAttribute("memberId",memberId);
-
-        return "redirect:/co";
+    @PostMapping("/signup")
+    public String postMemberForm(Member member) {
+        memberService.join(member);
+        return "redirect:/login";
     }
 
     @GetMapping("/denied")

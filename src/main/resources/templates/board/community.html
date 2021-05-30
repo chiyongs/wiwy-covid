@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
   <html>
     <head>
       <title>코로나 시대 살아남기</title>
@@ -326,12 +327,15 @@
                   </p>
                 </article>
               </div>
-              <ul th:unless="${param.memberId}" class="actions" id="actions-more">
+              <ul class="actions" id="actions-more">
                 <li>
-                  <a th:href="@{/login}" href="../member/signIn.html" class="button">Sign in</a>
+                  <a sec:authorize="isAnonymous()" th:href="@{/login}" href="../member/signIn.html" class="button">Sign in</a>
                 </li>
                 <li>
-                  <a th:href="@{/addMember}" href="../member/signUp.html" class="button">Sign up</a>
+                  <a sec:authorize="isAuthenticated()" th:href="@{/logout}" href="./community.html" class="button">Logout</a>
+                </li>
+                <li>
+                  <a sec:authorize="isAnonymous()" th:href="@{/signup}" href="../member/signUp.html" class="button">Sign up</a>
                 </li>
               </ul>
             </section>

@@ -34,10 +34,10 @@ class BoardControllerTest {
         board.setBoardName("자유게시판");
         boardService.makeBoard(board);
 
-        Member member = new Member();
-        member.setAge(25);
-        member.setUserName("shin");
-        memberService.join(member);
+//        Member member = new Member();
+//        member.setAge(25);
+//        member.setUserName("shin");
+//        memberService.join(member);
 
 //        for(int i=0;i<100;i++) {
 //            Long post = postService.post(member.getId(), board.getId(), "hi" + i, "bye" + i);

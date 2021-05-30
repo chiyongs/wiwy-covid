@@ -1,7 +1,9 @@
 package wiwy.covid.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,5 +28,7 @@ public class Member {
     private String zipcode;
     private String street;
     private String city;
+
+
 
 }

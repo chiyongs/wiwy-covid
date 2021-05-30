@@ -6,6 +6,7 @@ import wiwy.covid.domain.Member;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -30,6 +31,7 @@ public class MemberRepository {
         return em.createQuery("select m from Member m where m.userName = :name", Member.class)
                 .setParameter("name", userName)
                 .getResultList();
+
     }
 
     public Long delete(Long memberId) {
