@@ -275,7 +275,7 @@ a {
   margin-top: 10vw;
   margin-bottom: 20vw;
   padding-bottom: 10vw;
-  background: #1ec6f0;
+  background: #ffffff;
 }
 .map svg {
   width: 100%;
@@ -411,12 +411,14 @@ footer {
     height: 50vw;
     margin: 0;
     padding: 0;
-    background: #1ec6f0;
+    background: #ffffff;
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
   }
   .map svg {
+    display: block;
     width: 80%;
     height: 93%;
   }
@@ -1005,16 +1007,16 @@ footer {
   color: #fbfbfb;
 }
 .map button[data-city="map_city1"] {
-  left: 464px;
-  top: 4150px;
+  left: 164px;
+  top: 200px;
 } /*서울*/
 .map button[data-city="map_city2"] {
-  left: 684px;
-  top: 4750px;
+  left: 504px;
+  top: 655px;
 } /*부산*/
 .map button[data-city="map_city3"] {
-  left: 270px;
-  top: 260px;
+  left: 400px;
+  top: 550px;
 } /*대구*/
 .map button[data-city="map_city4"] {
   left: 38px;
