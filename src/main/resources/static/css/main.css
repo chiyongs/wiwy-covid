@@ -392,7 +392,7 @@ footer {
     padding-right: 5vw;
   }
   #content-section-5 {
-    margin-bottom: 16vw;
+    margin-bottom: 20vw;
   }
   .two-content {
     display: flex;
@@ -1124,5 +1124,5 @@ footer {
   top: 464px;
 } /*검역*/
 #content-section-5 {
-  margin-bottom: 20vw;
+  margin-bottom: 13vw;
 }
