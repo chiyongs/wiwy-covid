@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <html>
+
     <head>
       <title>자유게시판</title>
       <meta charset="utf-8" />
@@ -147,7 +147,7 @@
                 <h2>Menu</h2>
               </header>
               <ul>
-                <li><a href="community.html">홈</a></li>
+                <li><a th:href="@{/co}" href="community.html">홈</a></li>
                 <li>
                   <span class="opener">게시판</span>
                   <ul>
@@ -309,5 +309,5 @@
 
       <script th:src="@{js/index.js}" src="../../static/js/index.js"></script>
     </body>
-  </html>
+
 </html>
