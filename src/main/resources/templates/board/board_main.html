@@ -58,7 +58,9 @@
             <!-- Content -->
             <section>
               <header class="main">
-                <h1 th:text="${board.boardName}"><strong>자유게시판</strong></h1>
+                <h1 th:text="${board.boardName}">
+                  <strong>자유게시판</strong>
+                </h1>
               </header>
 
               <p th:text="${board.description}">
@@ -84,18 +86,34 @@
                     style="text-decoration: none !important"
                   >
                     <h2 class="article-title">
-                      <strong th:text="${postDTO.post.postName}">가나다라마바사</strong>
+                      <strong th:text="${postDTO.post.postName}"
+                        >가나다라마바사</strong
+                      >
                     </h2>
-                    <p th:text="${postDTO.post.content}" class="article-text">아자차카타파하</p>
-                    <time th:text="${postDTO.postTime}" class="article-text">방금</time>
+                    <p th:text="${postDTO.post.content}" class="article-text">
+                      아자차카타파하
+                    </p>
+                    <time th:text="${postDTO.postTime}" class="article-text"
+                      >방금</time
+                    >
                     <ul class="article-status">
-                      <li th:text="'👍🏻 ' + ${postDTO.post.likes}" title="공감" class="vote">👍🏻 0</li>
-                      <li th:text="'💬 ' + ${#lists.size(postDTO.post.comments)}"title="댓글" class="comment">💬 0</li>
+                      <li
+                        th:text="'👍🏻 ' + ${postDTO.post.likes}"
+                        title="공감"
+                        class="vote"
+                      >
+                        👍🏻 0
+                      </li>
+                      <li
+                        th:text="'💬 ' + ${#lists.size(postDTO.post.comments)}"
+                        title="댓글"
+                        class="comment"
+                      >
+                        💬 0
+                      </li>
                     </ul></a
                   >
                 </article>
-
-
               </div>
 
               <ul class="pagination">
@@ -140,7 +158,9 @@
                 <li>
                   <span class="opener">게시판</span>
                   <ul>
-                    <li><a th:href="@{/1}" href="board_main.html">자유게시판</a></li>
+                    <li>
+                      <a th:href="@{/1}" href="board_main.html">자유게시판</a>
+                    </li>
                     <li><a th:href="@{/2}" href="#">비밀게시판</a></li>
                     <li><a th:href="@{/3}" href="#">정보공유게시판</a></li>
                     <li><a th:href="@{/4}" href="#">백신게시판</a></li>
@@ -162,7 +182,7 @@
                   <a href="#" class="image"
                     ><img
                       th:src="@{images/pic06.jpg}"
-                      src="../../static/images/pic06.jpg"
+                      src="../../static/images/my.png"
                       alt=""
                   /></a>
                   <p align="center">
