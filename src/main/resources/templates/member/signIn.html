@@ -21,7 +21,7 @@
         <div class="inner">
           <!-- Header -->
           <header id="header">
-            <a href="../board/community.html" class="logo"
+            <a th:href="@{/co}" href="../board/community.html" class="logo"
               ><strong>코로나 시대</strong> 살아남기</a
             >
             <ul class="icons">
@@ -90,7 +90,9 @@
               <div>
                 <div class="btn-row">
                   <div class="col">
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">
+                    <button class="w-100 btn btn-primary btn-lg"
+                            th:onclick="|location.href='@{/co}'|"
+                            type="submit">
                       sign in
                     </button>
                   </div>
@@ -101,7 +103,7 @@
                       th:onclick="|location.href='@{/co}'|"
                       type="button"
                     >
-                      cancle
+                      cancel
                     </button>
                   </div>
                 </div>

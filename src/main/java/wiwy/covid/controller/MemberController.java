@@ -4,7 +4,9 @@ package wiwy.covid.controller;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,6 +23,7 @@ public class MemberController {
     private final MemberService memberService;
 
     // 회원 조회 매핑
+    @PreAuthorize("hasRole('ROLE_MEMBER')")
     @GetMapping("/member/{memberId}")
     public String member(@PathVariable Long memberId, Model model) {
         Member findMember = memberService.findOne(memberId);
@@ -28,12 +31,17 @@ public class MemberController {
         return "member";
     }
 
-    @GetMapping("/member/add")
-    public String getMemberForm() {
-        return "member/addForm";
+    @GetMapping("/login")
+    public String loginView() {
+        return "member/signIn";
     }
 
-    @PostMapping("/member/add")
+    @GetMapping("/addMember")
+    public String getMemberForm() {
+        return "member/signUp";
+    }
+
+    @PostMapping("/addMember")
     @ResponseBody
     public String postMemberForm(Member member, RedirectAttributes redirectAttributes) {
         Long memberId = memberService.join(member);
@@ -42,17 +50,10 @@ public class MemberController {
         return "redirect:/member/{memberId}";
     }
 
-//    //로그인
-//    @PostMapping("/login")
-//    public String loginPage(Member member) {
-//        member
-//    }
-
-//    //로그아웃
-//    @GetMapping("/logout")
-//    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-//        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-//        return "redirect:/login";
-//    }
+    @GetMapping("/denied")
+    @ResponseBody
+    public String deniedView() {
+        return "denied";
+    }
 
 }
