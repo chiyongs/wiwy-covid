@@ -4400,5 +4400,5 @@ button:disabled,
 .check {
   display: flex;
   justify-content: center;
-  padding-left: 900px;
+  padding-left: 40vw;
 }
