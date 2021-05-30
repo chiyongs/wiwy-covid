@@ -628,8 +628,12 @@ footer {
   position: absolute;
   top: 50%;
   width: 7em;
+  background-color: #f5f5f5;
 }
-
+.icon-image {
+  position: relative;
+  z-index: 20;
+}
 .features article .content {
   -moz-flex-grow: 1;
   -webkit-flex-grow: 1;
