@@ -42,12 +42,11 @@ public class MemberController {
     }
 
     @PostMapping("/addMember")
-    @ResponseBody
     public String postMemberForm(Member member, RedirectAttributes redirectAttributes) {
         Long memberId = memberService.join(member);
         redirectAttributes.addAttribute("memberId",memberId);
 
-        return "redirect:/member/{memberId}";
+        return "redirect:/co";
     }
 
     @GetMapping("/denied")

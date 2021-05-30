@@ -27,7 +27,13 @@ public class BoardController {
     private final BoardPaging boardPaging;
 
     @GetMapping("/co")
-    public String viewAllBoards(Model model) {
+    public String viewAllBoards(@RequestParam(required = false) Long memberId, Model model) {
+
+        if(memberId != null) {
+            Member member = memberService.findOne(memberId);
+            model.addAttribute("member", member);
+        }
+
 
         List<Board> boards = boardService.findAllBoards();
         List<BoardDTO> boardDTOS = new ArrayList<>();

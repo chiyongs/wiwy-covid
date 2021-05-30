@@ -314,17 +314,24 @@
                       src="../../static/images/pic06.jpg"
                       alt=""
                   /></a>
-                  <p align="center">
+                  <p th:if="${param.memberId}"
+                  > 회원명 :
+                    <span th:if="${param.memberId}"
+                    th:text="${member.userName}"></span>
+                  </p>
+
+                  <p th:unless="${param.memberId}"
+                          align="center">
                     커뮤니티 이용을 위해 <br />회원가입이 필요합니다!
                   </p>
                 </article>
               </div>
-              <ul class="actions" id="actions-more">
+              <ul th:unless="${param.memberId}" class="actions" id="actions-more">
                 <li>
                   <a th:href="@{/login}" href="../member/signIn.html" class="button">Sign in</a>
                 </li>
                 <li>
-                  <a th:href="@{/member/add}" href="../member/signUp.html" class="button">Sign up</a>
+                  <a th:href="@{/addMember}" href="../member/signUp.html" class="button">Sign up</a>
                 </li>
               </ul>
             </section>
