@@ -87,12 +87,43 @@
                   style="width: 50%; height: 60px"
                 />
               </div>
+              <div class="btn-row">
+                <label for="password">휴대폰 번호</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="휴대폰 번호를 입력하세요"
+                  style="width: 50%; height: 60px"
+                />
+              </div>
+              <div class="btn-row">
+                <label for="password">이메일</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="이메일을 입력하세요"
+                  style="width: 50%; height: 60px"
+                />
+              </div>
+              <div class="btn-row">
+                <label for="password">집 주소</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="집 주소를 입력하세요"
+                  style="width: 50%; height: 60px"
+                />
+              </div>
               <div>
                 <div class="btn-row">
                   <div class="col">
-                    <button class="w-100 btn btn-primary btn-lg"
-
-                            type="submit">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">
                       sign up
                     </button>
                   </div>
@@ -133,7 +164,9 @@
               <li>
                 <span class="opener">게시판</span>
                 <ul>
-                  <li><a th:href="@{/1}" href="board_main.html">자유게시판</a></li>
+                  <li>
+                    <a th:href="@{/1}" href="board_main.html">자유게시판</a>
+                  </li>
                   <li><a th:href="@{/2}" href="#">비밀게시판</a></li>
                   <li><a th:href="@{/3}" href="#">정보공유게시판</a></li>
                   <li><a th:href="@{/4}" href="#">백신게시판</a></li>
