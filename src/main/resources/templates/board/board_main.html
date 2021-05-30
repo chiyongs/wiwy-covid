@@ -61,7 +61,7 @@
                 <h1 th:text="${board.boardName}"><strong>자유게시판</strong></h1>
               </header>
 
-              <p>
+              <p th:text="${board.description}">
                 이 곳은 코로나 정보와 관련된 이야기뿐만아니라 다양한 이야기를
                 자유롭게 할 수 있는 "자유게시판"입니다.
               </p>
@@ -172,7 +172,7 @@
                 </article>
               </div>
               <ul class="actions" id="actions-more">
-                <li><a href="#" class="button"></a></li>
+                <li><a href="#" class="button">More</a></li>
               </ul>
             </section>
 

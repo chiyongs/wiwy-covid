@@ -16,5 +16,6 @@ public class Board {
     private Long id;
 
     private String boardName;
+    private String description;
 
 }

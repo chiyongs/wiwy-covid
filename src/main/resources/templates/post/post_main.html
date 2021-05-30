@@ -58,10 +58,10 @@
             <!-- Content -->
             <section>
               <header class="main">
-                <h1><strong>자유게시판</strong></h1>
+                <h1><strong th:text="${board.boardName}">자유게시판</strong></h1>
               </header>
 
-              <p>
+              <p th:text="${board.description}">
                 이 곳은 코로나 정보와 관련된 이야기뿐만아니라 다양한 이야기를
                 자유롭게 할 수 있는 "자유게시판"입니다.
               </p>
@@ -169,10 +169,10 @@
               <div class="mini-posts">
                 <article>
                   <a href="#" class="image"
-                    ><img
-                      th:src="@{images/pic06.jpg}"
-                      src="../../static/images/pic06.jpg"
-                      alt=""
+                  ><img
+                          th:src="@{images/pic06.jpg}"
+                          src="../../static/images/pic06.jpg"
+                          alt=""
                   /></a>
                   <p align="center">
                     커뮤니티 이용을 위해 <br />
@@ -181,7 +181,7 @@
                 </article>
               </div>
               <ul class="actions" id="actions-more">
-                <li><a href="#" class="button"></a></li>
+                <li><a href="#" class="button">More</a></li>
               </ul>
             </section>
 
@@ -193,32 +193,32 @@
               <div class="mini-posts">
                 <article>
                   <a
-                    href="https://blog.naver.com/mohw2016/222358574027"
-                    class="image"
-                    ><img
-                      th:src="@{images/picture1.png}"
-                      src="../../static/images/picture1.png"
-                      alt=""
+                          href="https://blog.naver.com/mohw2016/222358574027"
+                          class="image"
+                  ><img
+                          th:src="@{images/picture1.png}"
+                          src="../../static/images/picture1.png"
+                          alt=""
                   /></a>
                 </article>
                 <article>
                   <a
-                    href="http://ncov.mohw.go.kr/infoBoardView.do?brdId=3&brdGubun=32&dataGubun=328&ncvContSeq=4720&contSeq=4720&board_id=&gubun="
-                    class="image"
-                    ><img
-                      th:src="@{images/picture2.png}"
-                      src="../../static/images/picture2.png"
-                      alt=""
+                          href="http://ncov.mohw.go.kr/infoBoardView.do?brdId=3&brdGubun=32&dataGubun=328&ncvContSeq=4720&contSeq=4720&board_id=&gubun="
+                          class="image"
+                  ><img
+                          th:src="@{images/picture2.png}"
+                          src="../../static/images/picture2.png"
+                          alt=""
                   /></a>
                 </article>
                 <article>
                   <a
-                    href="https://www.youtube.com/watch?v=6e3JLnOMPQk"
-                    class="image"
-                    ><img
-                      th:src="@{images/picture3.png}"
-                      src="../../static/images/picture3.png"
-                      alt=""
+                          href="https://www.youtube.com/watch?v=6e3JLnOMPQk"
+                          class="image"
+                  ><img
+                          th:src="@{images/picture3.png}"
+                          src="../../static/images/picture3.png"
+                          alt=""
                   /></a>
                 </article>
               </div>
