@@ -60,7 +60,7 @@
               </h1>
             </div>
             <!-- <h4 class="mb-3">게시판 입력</h4> -->
-            <form th:action="@{/addMember}" method="post">
+            <form action="community.html" th:action method="post">
               <h2
                 th:if="${param.dup}"
                 th:text="'중복된 아이디입니다! 다시 입력해주세요'"
@@ -119,13 +119,12 @@
                   placeholder="집 주소를 입력하세요"
                   style="width: 50%; height: 60px"
                 />
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<!--                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
               </div>
               <div>
                 <div class="btn-row">
                   <div class="col">
                     <button class="w-100 btn btn-primary btn-lg"
-                            th:onclick="|location.href='@{/co}'|"
                             type="submit">
                       sign up
                     </button>
