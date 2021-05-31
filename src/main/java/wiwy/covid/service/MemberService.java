@@ -3,13 +3,13 @@ package wiwy.covid.service;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wiwy.covid.domain.Member;
@@ -24,7 +24,7 @@ import java.util.Optional;
 @Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class MemberService implements UserDetailsService {
+public class MemberService  {
 
     private final MemberRepository memberRepository;
 
@@ -32,8 +32,8 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public Long join(Member member) {
         validateDuplicateMember(member);
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        member.setPassword(encoder.encode(member.getPassword()));
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        member.setPassword(encoder.encode(member.getPassword()));
         memberRepository.save(member);
 
         return member.getId();
@@ -60,20 +60,20 @@ public class MemberService implements UserDetailsService {
         return memberRepository.delete(memberId);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-
-
-        List<Member> findMember = memberRepository.findByName(username);
-        Member member = findMember.get(0);
-
-                    List<GrantedAuthority> authorities = new ArrayList<>();
-
-            authorities.add(new SimpleGrantedAuthority("MEMBER"));
-
-            return new User(member.getUserName(), member.getPassword(), authorities);
-
-
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//
+//
+//
+//        List<Member> findMember = memberRepository.findByName(username);
+//        Member member = findMember.get(0);
+//
+//                    List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//            authorities.add(new SimpleGrantedAuthority("MEMBER"));
+//
+//            return new User(member.getUserName(), member.getPassword(), authorities);
+//
+//
+//    }
 }

@@ -60,7 +60,7 @@
               </h1>
             </div>
             <!-- <h4 class="mb-3">게시판 입력</h4> -->
-            <form th:action="@{/addMember}" method="post">
+            <form th:action="@{/signup}" method="post">
               <h2
                 th:if="${param.dup}"
                 th:text="'중복된 아이디입니다! 다시 입력해주세요'"
@@ -72,21 +72,12 @@
                   id="userName"
                   name="userName"
                   class="form-control"
-                  placeholder="아이디를 입력하세요"
+
                   style="width: 50%; height: 60px"
+                  readonly
                 />
               </div>
-              <div class="btn-row">
-                <label for="password">비밀번호</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  class="form-control"
-                  placeholder="비밀번호를 입력하세요"
-                  style="width: 50%; height: 60px"
-                />
-              </div>
+
               <div class="btn-row">
                 <label for="password">휴대폰 번호</label>
                 <input
@@ -94,8 +85,9 @@
                   id="password"
                   name="password"
                   class="form-control"
-                  placeholder="휴대폰 번호를 입력하세요"
+
                   style="width: 50%; height: 60px"
+                  readonly
                 />
               </div>
               <div class="btn-row">
@@ -105,8 +97,9 @@
                   id="password"
                   name="password"
                   class="form-control"
-                  placeholder="이메일을 입력하세요"
+
                   style="width: 50%; height: 60px"
+                  readonly
                 />
               </div>
               <div class="btn-row">
@@ -116,20 +109,14 @@
                   id="password"
                   name="password"
                   class="form-control"
-                  placeholder="집 주소를 입력하세요"
+
                   style="width: 50%; height: 60px"
+                  readonly
                 />
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
               </div>
               <div>
                 <div class="btn-row">
-                  <div class="col">
-                    <button class="w-100 btn btn-primary btn-lg"
-                            th:onclick="|location.href='@{/co}'|"
-                            type="submit">
-                      sign up
-                    </button>
-                  </div>
+
                   <div class="col">
                     <button
                       class="w-100 btn btn-secondary btn-lg"

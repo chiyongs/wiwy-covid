@@ -189,9 +189,10 @@
                 </article>
               </div>
               <ul class="actions" id="actions-more">
+
                 <li>
                   <a
-                    sec:authorize="isAnonymous()"
+                          th:unless="${param.memberId}"
                     th:href="@{/login}"
                     href="../member/signIn.html"
                     class="button"
@@ -200,22 +201,40 @@
                 </li>
                 <li>
                   <a
-                    sec:authorize="isAuthenticated()"
-                    th:href="@{/logout}"
-                    href="./community.html"
-                    class="button"
-                    >Logout</a
-                  >
-                </li>
-                <li>
-                  <a
-                    sec:authorize="isAnonymous()"
-                    th:href="@{/signup}"
+                          th:unless="${param.memberId}"
+                    th:href="@{/addMember}"
                     href="../member/signUp.html"
                     class="button"
-                    >Sign up</a
+                    >Sign Up</a
                   >
                 </li>
+<!--                <li>-->
+<!--                  <a-->
+<!--                    sec:authorize="isAnonymous()"-->
+<!--                    th:href="@{/login}"-->
+<!--                    href="../member/signIn.html"-->
+<!--                    class="button"-->
+<!--                    >Sign in</a-->
+<!--                  >-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a-->
+<!--                    sec:authorize="isAuthenticated()"-->
+<!--                    th:href="@{/logout}"-->
+<!--                    href="./community.html"-->
+<!--                    class="button"-->
+<!--                    >Logout</a-->
+<!--                  >-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a-->
+<!--                    sec:authorize="isAnonymous()"-->
+<!--                    th:href="@{/addMember}"-->
+<!--                    href="../member/signUp.html"-->
+<!--                    class="button"-->
+<!--                    >Sign up</a-->
+<!--                  >-->
+<!--                </li>-->
               </ul>
             </section>
 
