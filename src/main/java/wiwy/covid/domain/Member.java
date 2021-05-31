@@ -25,9 +25,9 @@ public class Member {
 
     private String phoneNumber;
 
-    private String zipcode;
-    private String street;
-    private String city;
+    private String email;
+
+    private String address;
 
 
 
