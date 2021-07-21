@@ -9,6 +9,7 @@ import wiwy.covid.domain.Post;
 import wiwy.covid.repository.PostRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Long post(Board board, Post p) {
+    public Long post(Optional<Board> board, Post p) {
         Post newPost = Post.makePost(board, p.getPostName(), p.getContent());
         postRepository.save(newPost);
         return newPost.getId();

@@ -16,6 +16,7 @@ import wiwy.covid.service.PostService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -59,7 +60,7 @@ public class BoardController {
     // 특정 게시판 보기
     @GetMapping("/{boardId}")
     public String viewOneBoard(@PathVariable Long boardId, Model model) {
-        Board board = boardService.findOne(boardId);
+        Optional<Board> board = boardService.findOne(boardId);
         List<Post> posts = postService.pagingPosts(boardId, 0, 10);
 
         List<PostDTO> postDTOS = new ArrayList<>();
@@ -79,7 +80,7 @@ public class BoardController {
     // 게시판 페이징
     @GetMapping("/{boardId}/page/{pageNum}")
     public String viewOnePage(@PathVariable Long boardId, @PathVariable int pageNum, Model model) {
-        Board board = boardService.findOne(boardId);
+        Optional<Board> board = boardService.findOne(boardId);
         List<Post> posts = postService.findPostsByBoardId(boardId);
         Integer totalCount = posts.size();
 

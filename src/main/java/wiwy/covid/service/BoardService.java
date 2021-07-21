@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wiwy.covid.domain.Board;
-import wiwy.covid.domain.Member;
 import wiwy.covid.repository.BoardRepository;
+import wiwy.covid.repository.BoardRepositoryImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,25 +26,31 @@ public class BoardService {
 
     // 중복 게시판 검증
     private void validateDuplicateBoard(Board board) {
-        List<Board> findBoards = boardRepository.findByName(board.getBoardName());
-        if(!findBoards.isEmpty()) {
+        Optional<Board> findBoard = boardRepository.findByBoardName(board.getBoardName());
+        if(findBoard.isPresent()) {
             throw new IllegalStateException("이미 존재하는 게시판입니다.");
         }
     }
 
-    public Board findOne(Long boardId) {
+    public Optional<Board> findOne(Long boardId) {
         return boardRepository.findById(boardId);
     }
 
-    public List<Board> findBoardByName(String boardName) {
-        return boardRepository.findByName(boardName);
+    public Optional<Board> findBoardByName(String boardName) {
+        return boardRepository.findByBoardName(boardName);
     }
 
     public List<Board> findAllBoards() {
         return boardRepository.findAll();
     }
 
-    public Long deleteBoard(Long boardId) {
-        return boardRepository.delete(boardId);
+    public void deleteBoard(Long boardId) {
+        Optional<Board> findBoard = boardRepository.findById(boardId);
+        if (findBoard.isEmpty()) {
+            // 삭제할 보드가 없다
+            throw new IllegalStateException("삭제할 게시판이 존재하지 않는 게시판입니다.");
+        }
+        Board deleteBoard = findBoard.get();
+        boardRepository.delete(deleteBoard);
     }
 }
