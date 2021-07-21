@@ -2,8 +2,11 @@ package wiwy.covid.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedBy;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -21,7 +24,8 @@ public class Post {
     private String postName;
     private String content;
 
-    private LocalDateTime createTime;
+    @CreationTimestamp
+    private Timestamp createTime;
 
     private int viewCnt;
 
@@ -64,7 +68,6 @@ public class Post {
 
     public static Post makePost(Board board, String postName, String content) {
         Post post = new Post();
-        post.setCreateTime(LocalDateTime.now());
         post.setBoard(board);
         post.setPostName(postName);
         post.setContent(content);
@@ -81,11 +84,12 @@ public class Post {
         public static final int MONTH = 12;
     }
 
-    public String calculateTime(LocalDateTime paramDate) {
+    public String calculateTime(Timestamp paramDate) {
 
-        Date date = Date.from(paramDate.atZone(ZoneId.systemDefault()).toInstant());
+//        Date date = Date.from(paramDate.atZone(ZoneId.systemDefault()).toInstant());
+
         long curTime = System.currentTimeMillis();
-        long regTime = date.getTime();
+        long regTime = new Date(paramDate.getTime()).getTime();
         long diffTime = (curTime - regTime) / 1000;
 
         String msg = null;

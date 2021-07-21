@@ -3,6 +3,7 @@ package wiwy.covid.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wiwy.covid.domain.Board;
@@ -49,8 +50,13 @@ public class PostService {
         return postRepository.findByMemberId(memberId);
     }
 
-    public Optional<Post> findOne(Long postId) {
-        return postRepository.findById(postId);
+    public Post findOne(Long postId) {
+
+        Optional<Post> findPost = postRepository.findById(postId);
+        if (findPost.isEmpty()) {
+            throw new IllegalStateException("찾는 Post가 존재하지 않습니다.");
+        }
+        return findPost.get();
     }
 
     public List<Post> findBoards() {
@@ -63,7 +69,7 @@ public class PostService {
     }
 
     public Page<Post> pagingPosts (Long boardId, int page, int perPageNum) {
-        PageRequest request = PageRequest.of(page, perPageNum);
+        PageRequest request = PageRequest.of(page, perPageNum, Sort.by("createTime").descending());
         return postRepository.findByBoardId(boardId, request);
     }
 
