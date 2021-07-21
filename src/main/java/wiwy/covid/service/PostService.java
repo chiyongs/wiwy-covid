@@ -21,8 +21,8 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Long post(Optional<Board> board, Post p) {
-        Post newPost = Post.makePost(board.get(), p.getPostName(), p.getContent());
+    public Long post(Board board, Post p) {
+        Post newPost = Post.makePost(board, p.getPostName(), p.getContent());
         postRepository.save(newPost);
         return newPost.getId();
     }

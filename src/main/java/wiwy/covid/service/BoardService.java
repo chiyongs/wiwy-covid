@@ -32,8 +32,12 @@ public class BoardService {
         }
     }
 
-    public Optional<Board> findOne(Long boardId) {
-        return boardRepository.findById(boardId);
+    public Board findOne(Long boardId) {
+        Optional<Board> findBoard = boardRepository.findById(boardId);
+        if (findBoard.isEmpty()) {
+            throw new IllegalStateException("찾으려는 게시판이 존재하지 않습니다.");
+        }
+        return findBoard.get();
     }
 
     public Optional<Board> findBoardByName(String boardName) {

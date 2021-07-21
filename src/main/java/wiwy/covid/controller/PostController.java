@@ -24,7 +24,7 @@ public class PostController {
     // 특정 게시판에 존재하는 특정 게시글 보기
     @GetMapping("/{boardId}/view/{postId}")
     public String viewPost(@PathVariable Long boardId, @PathVariable Long postId, Model model) {
-        Optional<Board> board = boardService.findOne(boardId);
+        Board board = boardService.findOne(boardId);
         Optional<Post> post = postService.findOne(postId);
 
         model.addAttribute("board", board);
@@ -41,7 +41,7 @@ public class PostController {
     // 특정 게시판에 게시글 생성
     @PostMapping("/{boardId}/add")
     public String postAddPost(@PathVariable Long boardId, Post post, RedirectAttributes redirectAttributes) {
-        Optional<Board> board = boardService.findOne(boardId);
+        Board board = boardService.findOne(boardId);
         Long postId = postService.post(board, post);
         redirectAttributes.addAttribute("boardId", boardId);
         redirectAttributes.addAttribute("postId",postId);
