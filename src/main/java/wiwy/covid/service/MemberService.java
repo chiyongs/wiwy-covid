@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wiwy.covid.domain.Member;
 import wiwy.covid.repository.MemberRepository;
+import wiwy.covid.repository.MemberRepositoryImpl;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,8 +42,8 @@ public class MemberService  {
 
     // 중복 회원 검증
     private void validateDuplicateMember(Member member) {
-        List<Member> findMembers = memberRepository.findByName(member.getUserName());
-        if(!findMembers.isEmpty()) {
+        Optional<Member> findMember = memberRepository.findByUsername(member.getUsername());
+        if(findMember.isPresent()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
@@ -53,11 +53,16 @@ public class MemberService  {
     }
 
     public Member findOne(Long memberId) {
-        return memberRepository.findById(memberId);
+
+        Optional<Member> findMember = memberRepository.findById(memberId);
+        if (findMember.isEmpty()) {
+            throw new IllegalStateException("찾는 회원이 존재하지 않습니다.");
+        }
+        return findMember.get();
     }
 
-    public Long deleteMember(Long memberId) {
-        return memberRepository.delete(memberId);
+    public void deleteMember(Long memberId) {
+        memberRepository.deleteById(memberId);
     }
 
 //    @Override
