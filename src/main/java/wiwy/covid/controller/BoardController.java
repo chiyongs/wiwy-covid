@@ -2,6 +2,7 @@ package wiwy.covid.controller;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class BoardController {
         for (Board board : boards) {
             List<PostDTO> postDTOS = new ArrayList<>();
             BoardDTO boardDTO = new BoardDTO();
-            List<Post> posts = postService.pagingPosts(board.getId(), 0, 5);
+            Page<Post> posts = postService.pagingPosts(board.getId(), 0, 5);
             for (Post post : posts) {
                 PostDTO postDTO = new PostDTO();
                 postDTO.setPost(post);
@@ -61,7 +62,7 @@ public class BoardController {
     @GetMapping("/{boardId}")
     public String viewOneBoard(@PathVariable Long boardId, Model model) {
         Optional<Board> board = boardService.findOne(boardId);
-        List<Post> posts = postService.pagingPosts(boardId, 0, 10);
+        Page<Post> posts = postService.pagingPosts(boardId, 0, 10);
 
         List<PostDTO> postDTOS = new ArrayList<>();
         for (Post post : posts) {
@@ -91,7 +92,7 @@ public class BoardController {
         bp.setPaging(paging);
         bp.setTotalCount(totalCount);
 
-        List<Post> returnPosts = postService.pagingPosts(boardId, bp.getPaging().getPageStart(), 10);
+        Page<Post> returnPosts = postService.pagingPosts(boardId, bp.getPaging().getPageStart(), 10);
 
         List<PostDTO> postDTOS = new ArrayList<>();
         for (Post post : returnPosts) {

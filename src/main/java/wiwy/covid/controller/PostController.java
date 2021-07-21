@@ -25,7 +25,8 @@ public class PostController {
     @GetMapping("/{boardId}/view/{postId}")
     public String viewPost(@PathVariable Long boardId, @PathVariable Long postId, Model model) {
         Optional<Board> board = boardService.findOne(boardId);
-        Post post = postService.findOne(postId);
+        Optional<Post> post = postService.findOne(postId);
+
         model.addAttribute("board", board);
         model.addAttribute("post", post);
         return "post/post_main";

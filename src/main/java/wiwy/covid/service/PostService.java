@@ -1,12 +1,14 @@
 package wiwy.covid.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wiwy.covid.domain.Board;
-import wiwy.covid.domain.Member;
 import wiwy.covid.domain.Post;
 import wiwy.covid.repository.PostRepository;
+import wiwy.covid.repository.PostRepositoryImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +22,7 @@ public class PostService {
 
     @Transactional
     public Long post(Optional<Board> board, Post p) {
-        Post newPost = Post.makePost(board, p.getPostName(), p.getContent());
+        Post newPost = Post.makePost(board.get(), p.getPostName(), p.getContent());
         postRepository.save(newPost);
         return newPost.getId();
     }
@@ -36,18 +38,18 @@ public class PostService {
 //    }
 
     public List<Post> findPostsByName(String postName) {
-        return postRepository.findByName(postName);
+        return postRepository.findByPostName(postName);
     }
 
     public List<Post> findPostsByBoardId(Long boardId) {
-        return postRepository.findPostsByBoardId(boardId);
+        return postRepository.findByBoardId(boardId);
     }
 
     public List<Post> findByMember(Long memberId) {
         return postRepository.findByMemberId(memberId);
     }
 
-    public Post findOne(Long postId) {
+    public Optional<Post> findOne(Long postId) {
         return postRepository.findById(postId);
     }
 
@@ -56,11 +58,13 @@ public class PostService {
     }
 
     public Long deletePost (Long postId) {
-        return postRepository.delete(postId);
+        postRepository.deleteById(postId);
+        return postId;
     }
 
-    public List<Post> pagingPosts (Long boardId, int page, int perPageNum) {
-        return postRepository.pagingPosts(boardId, page, perPageNum);
+    public Page<Post> pagingPosts (Long boardId, int page, int perPageNum) {
+        PageRequest request = PageRequest.of(page, perPageNum);
+        return postRepository.findByBoardId(boardId, request);
     }
 
 
