@@ -31,13 +31,13 @@ public class MemberController {
         return "member/memberInfo";
     }
 
-    @GetMapping("/login")
-    public String loginView() {
+    @GetMapping("/loginForm")
+    public String loginForm() {
         return "member/signIn";
     }
 
-    @GetMapping("/addMember")
-    public String addMember() { return "member/signUp"; };
+    @GetMapping("/joinForm")
+    public String joinForm() { return "member/signUp"; };
 
     @PostMapping("/addMember")
     public String postMember(Member member, RedirectAttributes redirectAttributes) {
