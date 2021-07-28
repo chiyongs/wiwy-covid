@@ -26,9 +26,10 @@ public class MemberController {
 
     // 회원 조회 매핑
     @GetMapping("/member/info")
-    public String member(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String member(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         Member currentMember = principalDetails.getMember();
         log.debug("currentMember = {}", currentMember);
+        model.addAttribute("member", currentMember);
 
         return "member/memberInfo";
     }

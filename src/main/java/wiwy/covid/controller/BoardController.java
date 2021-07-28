@@ -3,6 +3,7 @@ package wiwy.covid.controller;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -101,44 +102,12 @@ public class BoardController {
         return "/board/main";
     }
 
-    // 게시판 페이징
-//    @GetMapping("/{boardId}/page/{pageNum}")
-//    public String viewOnePage(@PathVariable Long boardId, @PathVariable int pageNum, Model model) {
-//        Board board = boardService.findOne(boardId);
-//        List<Post> posts = postService.findPostsByBoardId(boardId);
-//        Integer totalCount = posts.size();
-//
-//        BoardPaging bp = new BoardPaging();
-//        Paging paging = new Paging();
-//        paging.setPage(pageNum);
-//
-//        bp.setPaging(paging);
-//        bp.setTotalCount(totalCount);
-//
-//        Page<Post> returnPosts = postService.pagingPosts(boardId, bp.getPaging().getPageStart(), 10);
-//
-//        List<PostDTO> postDTOS = new ArrayList<>();
-//        for (Post post : returnPosts) {
-//            PostDTO postDTO = new PostDTO();
-//            postDTO.setPost(post);
-//            postDTO.setPostTime(post.calculateTime(post.getCreateTime()));
-//            postDTOS.add(postDTO);
-//        }
-//
-//        model.addAttribute("board", board);
-//        model.addAttribute("bp", bp);
-//        model.addAttribute("postDTOS", postDTOS);
-//
-//
-//        return "/board/main";
-//    }
-
-    @GetMapping("/addBoard")
+    @GetMapping("/board/add")
     public String getEditBoard() {
         return "board/addBoardForm";
     }
 
-    @PostMapping("/addBoard")
+    @PostMapping("/board/add")
     public String postEditBoard(Board board, RedirectAttributes redirectAttributes) {
         try {
             Long boardId = boardService.makeBoard(board);
