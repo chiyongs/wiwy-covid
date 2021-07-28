@@ -23,9 +23,7 @@ public class Member {
     private String username;
     private Integer age;
     private String password;
-    private String phoneNumber;
     private String email;
-    private String address;
 
     private String role; // ROLE_USER, ROLE_ADMIN
 
@@ -42,13 +40,11 @@ public class Member {
     }
 
     @Builder
-    public Member(String username, Integer age, String password, String phoneNumber, String email, String address, String role, String provider, String providerId, Timestamp createDate) {
+    public Member(String username, Integer age, String password, String email, String role, String provider, String providerId, Timestamp createDate) {
         this.username = username;
         this.age = age;
         this.password = password;
-        this.phoneNumber = phoneNumber;
         this.email = email;
-        this.address = address;
         this.role = role;
         this.provider = provider;
         this.providerId = providerId;
