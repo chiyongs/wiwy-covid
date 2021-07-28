@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 //import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 //import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberController {
 
     private final MemberService memberService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     // 회원 조회 매핑
 //    @PreAuthorize("hasRole('MEMBER')")
@@ -40,24 +43,19 @@ public class MemberController {
     public String joinForm() { return "member/signUp"; };
 
     @PostMapping("/addMember")
-    public String postMember(Member member, RedirectAttributes redirectAttributes) {
-        Long memberId = memberService.join(member);
-        redirectAttributes.addAttribute("memberId",memberId);
-        return "redirect:/co";
+    public String addMember(Member member) {
+        member.setRole("ROLE_USER");
+        String rawPassword = member.getPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+        member.setPassword(encPassword);
 
-    }
-
-
-    @GetMapping("/signup")
-    public String getMemberForm() {
-        return "member/signUp";
-    }
-
-    @PostMapping("/signup")
-    public String postMemberForm(Member member) {
         memberService.join(member);
-        return "redirect:/login";
+        return "redirect:/loginForm";
+
     }
+
+
+
 
     @GetMapping("/denied")
     @ResponseBody

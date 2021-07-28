@@ -62,11 +62,11 @@
             <!-- <h4 class="mb-3">게시판 입력</h4> -->
             <form th:action="@{/login}" method="post">
               <div class="btn-row">
-                <label for="userName">아이디</label>
+                <label for="username">아이디</label>
                 <input
                   type="text"
-                  id="userName"
-                  name="userName"
+                  id="username"
+                  name="username"
                   class="form-control"
                   placeholder="아이디를 입력하세요"
                   style="width: 50%; height: 60px"
@@ -161,8 +161,8 @@
               </article>
             </div>
             <ul class="actions" id="actions-more">
-              <li><a href="signin.html" class="button">Sign in</a></li>
-              <li><a href="signUp.html" class="button">Sign up</a></li>
+              <li><a href="signin.html" th:href="@{/loginForm}" class="button">Sign in</a></li>
+              <li><a href="signUp.html" th:href="@{/joinForm}" class="button">Sign up</a></li>
             </ul>
           </section>
 

@@ -60,17 +60,17 @@
               </h1>
             </div>
             <!-- <h4 class="mb-3">게시판 입력</h4> -->
-            <form action="community.html" th:action method="post">
+            <form action="community.html" th:action="@{/addMember}" method="post">
               <h2
                 th:if="${param.dup}"
                 th:text="'중복된 아이디입니다! 다시 입력해주세요'"
               ></h2>
               <div class="btn-row">
-                <label for="userName">아이디</label>
+                <label for="username">아이디</label>
                 <input
                   type="text"
-                  id="userName"
-                  name="userName"
+                  id="username"
+                  name="username"
                   class="form-control"
                   placeholder="아이디를 입력하세요"
                   style="width: 50%; height: 60px"
