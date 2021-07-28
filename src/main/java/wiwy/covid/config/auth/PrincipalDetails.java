@@ -67,11 +67,13 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         return true;
     }
 
+    // 계정이 만료되었는 지
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    // 비밀번호를 오랫동안 사용했는 지
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
