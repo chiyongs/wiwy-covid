@@ -2,21 +2,20 @@ package wiwy.covid.controller;
 
 
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-//import org.springframework.security.access.prepost.PreAuthorize;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import wiwy.covid.config.auth.PrincipalDetails;
 import wiwy.covid.domain.Member;
 import wiwy.covid.service.MemberService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -26,11 +25,11 @@ public class MemberController {
 
 
     // 회원 조회 매핑
-//    @PreAuthorize("hasRole('MEMBER')")
-    @GetMapping("/member/{memberId}")
-    public String member(@PathVariable Long memberId, Model model) {
-        Member findMember = memberService.findOne(memberId);
-        model.addAttribute("member", findMember);
+    @GetMapping("/member/info")
+    public String member(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Member currentMember = principalDetails.getMember();
+        log.debug("currentMember = {}", currentMember);
+
         return "member/memberInfo";
     }
 

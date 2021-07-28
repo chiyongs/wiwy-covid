@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Getter @Setter
+@ToString
 public class Member {
 
     @Id @GeneratedValue

@@ -52,6 +52,17 @@ public class MemberService  {
         return memberRepository.findAll();
     }
 
+    public Member findByUsername(String username) {
+        Optional<Member> byUsername = memberRepository.findByUsername(username);
+        if (byUsername.isPresent()) {
+            Member member = byUsername.get();
+            return member;
+        } else {
+            return null;
+        }
+
+    }
+
     public Member findOne(Long memberId) {
 
         Optional<Member> findMember = memberRepository.findById(memberId);
@@ -65,20 +76,4 @@ public class MemberService  {
         memberRepository.deleteById(memberId);
     }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//
-//
-//
-//        List<Member> findMember = memberRepository.findByName(username);
-//        Member member = findMember.get(0);
-//
-//                    List<GrantedAuthority> authorities = new ArrayList<>();
-//
-//            authorities.add(new SimpleGrantedAuthority("MEMBER"));
-//
-//            return new User(member.getUserName(), member.getPassword(), authorities);
-//
-//
-//    }
 }

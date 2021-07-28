@@ -8,12 +8,14 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import wiwy.covid.config.auth.PrincipalDetails;
 import wiwy.covid.config.oauth.provider.FacebookUserInfo;
 import wiwy.covid.config.oauth.provider.GoogleUserInfo;
 import wiwy.covid.config.oauth.provider.NaverUserInfo;
 import wiwy.covid.config.oauth.provider.OAuth2UserInfo;
 import wiwy.covid.domain.Member;
 import wiwy.covid.repository.MemberRepository;
+import wiwy.covid.service.MemberService;
 
 import java.util.Map;
 import java.util.Optional;
@@ -27,7 +29,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberService memberService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -61,11 +63,11 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String email = oAuth2UserInfo.getEmail();
         String role = "ROLE_USER";
 
-        Optional<Member> memberEntity = memberRepository.findByUsername(username);
+        Member memberEntity = memberService.findByUsername(username);
 
-        if (memberEntity.isEmpty()) {
+        if (memberEntity == null) {
             log.debug("OAuth 로그인이 최초입니다.");
-            Member member = Member.builder()
+            memberEntity = Member.builder()
                     .username(username)
                     .password(password)
                     .email(email)
@@ -73,10 +75,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .provider(provider)
                     .providerId(providerId)
                     .build();
+            memberService.join(memberEntity);
         }
 
-
-
-        return super.loadUser(userRequest);
+        return new PrincipalDetails(memberEntity, oAuth2User.getAttributes());
     }
 }
