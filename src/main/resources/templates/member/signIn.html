@@ -88,8 +88,11 @@
                 <div class="btn-row">
                   <div class="col">
                     <button class="w-100 btn btn-primary btn-lg" type="submit">
-                      sign in
+                      로그인
                     </button>
+                    <a href="/oauth2/authorization/google">구글 로그인</a>
+                    <a href="/oauth2/authorization/facebook">페이스북 로그인</a>
+                    <a href="/oauth2/authorization/naver">네이버 로그인</a>
                   </div>
                   <div class="col">
                     <button
@@ -98,7 +101,7 @@
                       th:onclick="|location.href='@{/co}'|"
                       type="button"
                     >
-                      cancel
+                      취소
                     </button>
                   </div>
                 </div>
