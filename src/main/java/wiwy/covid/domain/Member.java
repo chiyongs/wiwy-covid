@@ -21,7 +21,6 @@ public class Member {
     private Long id;
 
     private String username;
-    private Integer age;
     private String password;
     private String email;
 
@@ -40,9 +39,8 @@ public class Member {
     }
 
     @Builder
-    public Member(String username, Integer age, String password, String email, String role, String provider, String providerId, Timestamp createDate) {
+    public Member(String username, String password, String email, String role, String provider, String providerId, Timestamp createDate) {
         this.username = username;
-        this.age = age;
         this.password = password;
         this.email = email;
         this.role = role;

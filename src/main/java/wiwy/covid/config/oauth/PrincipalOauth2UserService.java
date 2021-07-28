@@ -65,7 +65,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
         if (memberEntity.isEmpty()) {
             log.debug("OAuth 로그인이 최초입니다.");
-            memberEntity = Member.builder()
+            Member member = Member.builder()
                     .username(username)
                     .password(password)
                     .email(email)
