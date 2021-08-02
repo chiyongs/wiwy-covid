@@ -21,8 +21,6 @@ import wiwy.covid.service.MemberService;
 public class MemberController {
 
     private final MemberService memberService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
 
     // 회원 조회 매핑
     @GetMapping("/member/info")
@@ -44,14 +42,8 @@ public class MemberController {
 
     @PostMapping("/addMember")
     public String addMember(Member member) {
-        member.setRole("ROLE_USER");
-        String rawPassword = member.getPassword();
-        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        member.setPassword(encPassword);
-
         memberService.join(member);
         return "redirect:/loginForm";
-
     }
 
 

@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wiwy.covid.domain.Member;
@@ -27,13 +28,16 @@ import java.util.Optional;
 public class MemberService  {
 
     private final MemberRepository memberRepository;
-
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public Long join(Member member) {
         validateDuplicateMember(member);
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        member.setPassword(encoder.encode(member.getPassword()));
+
+        member.setRole("ROLE_USER");
+        String rawPassword = member.getPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+        member.setPassword(encPassword);
         memberRepository.save(member);
 
         return member.getId();
@@ -60,11 +64,9 @@ public class MemberService  {
         } else {
             return null;
         }
-
     }
 
     public Member findOne(Long memberId) {
-
         Optional<Member> findMember = memberRepository.findById(memberId);
         if (findMember.isEmpty()) {
             throw new IllegalStateException("찾는 회원이 존재하지 않습니다.");
